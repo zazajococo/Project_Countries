@@ -50,7 +50,7 @@ class Country {
         codes.forEach(code => {
             data.forEach(element => {
                 if (element[3] == code) {
-                    this.neighbors.append(element[0]);
+                    neighbors.append(element[0]);
                 }
             });
         });
