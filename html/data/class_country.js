@@ -19,50 +19,105 @@ class Country {
     capital;
     continent;
     population;
+    area;
     neighbors;
+    static all_countries = [];
 
-    constructor (alpha3, name, capital, continent, population, neighbors) {
+    constructor (alpha3, name, capital, continent, population, area, neighbors) {
         this.alpha3 = alpha3;
         this.name = name;
         this.capital = capital;
         this.continent = continent;
         this.population = population;
+        this.area = area;
         this.neighbors = neighbors;
     }
 
-    static toString() {
-        return `${this.alpha3}, ${this.name}, ${this.capital}, ${this.continent}, ${this.population}, (${this.neighbors.join(', ')})`;
+    toString() {
+        return `${this.alpha3}, ${this.name}, ${this.capital}, ${this.continent}, ${this.population}, ` + this.getNeighbors(this.neighbors);
     }
 
     static getName(code) {
-        const data = JSON.parse("countries.js")
-        data.forEach(element => {
-            if (element[2] == code) {
-                return element[0];
+        for (let country of this.all_countries) {
+            if (country.alpha3 == code) {
+                return country.name;
             }
-        });
+        }
     }
 
-    static getNeighbors(codes) {
-        /* get the codes from codes and return a tuple with their names*/
-        const data = JSON.parse("countries.js")
+    getNeighbors(codes) {
         const names = [];
-        codes.forEach(code => {
-            data.forEach(element => {
-                if (element[3] == code) {
-                    neighbors.append(element[0]);
-                }
-            });
-        });
+        for (let i = 0; i < codes.length; i++) {
+            const name = Country.getName(codes[i]);
+            if (name) {
+                names.push(name);
+            } else {
+                names.push(codes[i]);
+            }
+        }
+        return "(" +names.join(", ")+")";
     }
 
     static fill_countries() {
-        const data = JSON.parse("countries.js")
-        data.forEach(element => {
-            const country = new Country(element[3], element[0], element[5], element[8], element[9], this.getNeighbors(element[14]))
-            console.log(country.toString())
-        });
+        this.all_countries = countries.map(
+            country =>  {
+                const c = new Country
+            (
+                country.alpha3Code ? country.alpha3Code : "No Alpha3Code", 
+                country.translations.fr ? country.translations.fr : "No translations found", 
+                country.capital ? country.capital : "No Capital found", 
+                country.region ? country.region : "No region", 
+                country.population ? country.population : "No population", 
+                country.area ? country.area : "No area",
+                country.borders ? country.borders : ["No borders"])
+            
+            return c;
+            }
+        )
+    } 
+
+    //omplétez votre classe Country avec les méthodes suivantes : 
+    //  ●  getPopDensity() : retourne la densité de population du pays (hab. / Km2) 
+
+    getArea() {
+        return this.area;
+    }
+
+
+    getPopDensity() {
+        const area = this.getArea();
+        const pop = this.population;
+        return pop / area;
+    }
+
+    //  ●  getBorders() : retourne un tableau JS des pays frontaliers (les objets Country, pas les codes). 
+
+    getBorders() {
+        const borders = [];
+        for (let i = 0; i < this.borders.length; i++) {
+            for (let j = 0; j < this.all_countries.length; j++) {
+                if (this.borders[i] === this.all_countries[j].alpha3Code) {
+                    borders.push(this.all_countries[j]);
+                }
+            }
+        }
+        return borders;
+    }
+
+    //  ●  getCurrencies() : retourne un tableau des monnaies (objet Currencies)
+
+    getCurrencies(){
+        return null;
+    }
+
+    // getLanguage() : retourne un tableau des langues (objet Languages
+
+    getLanguage() {
+        return null;
     }
 }
 
 Country.fill_countries()
+console.log(Country.all_countries.length)
+console.log(Country.all_countries[0].toString())
+console.log(Country.all_countries[8].toString())
