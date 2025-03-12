@@ -51,21 +51,24 @@ class Currency{
 
 }
 
-let monnaie1 = new Currency();
-monnaie1.code = "EUR";
-monnaie1.symbole = "Euro";
-monnaie1.nom = "€"
-console.log("To String");
-console.log(monnaie1.toString());
-
  // Clé : valeur, ex : code : EUR
- function fill_currencies(){
-    let countries = JSON.parse(countries.js);
-    all_currencies = countries.map(item => {
-        //console.log(item.aVoir);
-    })
-    // Recupere tout les currencies dans countries.js
-    // Créer des objets Currency avec les currencies recuperé 
-    // Objet stockée dans all_currencies = {} ;
-
+ function fill_currencies() {
+    const all_currencies = countries.map(country => {
+        if (country.currencies && country.currencies.length > 0) {
+            country.currencies.forEach(currencyData => {
+                //if (!all_currencies.has(code)) {
+                    const currency = new Currency(currencyData[i].code, currencyData[i].name, currencyData[i].symbol);
+                    console.log(currency.toString()); 
+                    return currency;
+                //}
+            })
+            
+        }
+        else{
+            console.log("Aucune monnaie")
+        }
+    });
 }
+
+
+
