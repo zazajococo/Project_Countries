@@ -58,6 +58,10 @@ class Country {
         return "(" +names.join(", ")+")";
     }
 
+    getNbNeighbors() {
+        return this.neighbors.length;
+    }
+
     static fill_countries() {
         this.all_countries = countries.map(
             country =>  {
@@ -69,7 +73,7 @@ class Country {
                 country.region ? country.region : "No region", 
                 country.population ? country.population : "No population", 
                 country.area ? country.area : "No area",
-                country.borders ? country.borders : ["No borders"])
+                country.borders ? country.borders : [])
             
             return c;
             }
@@ -93,15 +97,18 @@ class Country {
     //  ●  getBorders() : retourne un tableau JS des pays frontaliers (les objets Country, pas les codes). 
 
     getBorders() {
-        const borders = [];
+        const b = [];
+        if (!Array.isArray(this.borders)) {
+            this.b = [];
+        }
         for (let i = 0; i < this.borders.length; i++) {
             for (let j = 0; j < this.all_countries.length; j++) {
                 if (this.borders[i] === this.all_countries[j].alpha3Code) {
-                    borders.push(this.all_countries[j]);
+                    b.push(this.all_countries[j]);
                 }
             }
         }
-        return borders;
+        return b;
     }
 
     //  ●  getCurrencies() : retourne un tableau des monnaies (objet Currencies)
@@ -118,6 +125,3 @@ class Country {
 }
 
 Country.fill_countries()
-console.log(Country.all_countries.length)
-console.log(Country.all_countries[0].toString())
-console.log(Country.all_countries[8].toString())
