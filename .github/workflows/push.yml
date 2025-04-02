@@ -19,4 +19,4 @@ jobs:
       - name: Push upstream changes to fork
         run: |
           git checkout main
-          git push https://${{ secrets.UPSTREAM_PAT }}@github.com/Project_Countries.git
+          git push https://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@github.com/Project_Countries.git
