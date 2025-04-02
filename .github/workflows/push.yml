@@ -16,17 +16,6 @@ jobs:
 
      
 
-      - name: Add remotes
-        run: |
-          git remote add fork https://github.com/LaSyCa/Project_Countries.git
-          git fetch fork
-
-      - name: Merge fork into upstream (repo père)
-        run: |
-          git checkout main
-          git merge fork/main --no-edit
-          git push origin main  # Pousse dans le repo père
-
       - name: Push upstream changes to fork
         run: |
           git checkout main
