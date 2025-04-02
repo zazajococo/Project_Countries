@@ -1,29 +1,53 @@
-// Q1 : 
+
+/*Tests 
+Écrivez  des  fonctions  permettant  de  répondre  aux  questions  suivantes.  Les  résultats 
+doivent s’afficher dans la console du navigateur à l’aide de console.table() si ça s’y 
+prête*/
+
+// Q1 - outsideTheContinent() : Tableau JS des pays (Objets Country) dont au moins un pays frontalier n'est pas dans le même continent
+
 function outsideTheContinent() {
-    const paysContinent = new Map(countries.map(c => [c.alpha3Code, c.region])) // dans borders c'est alapha3 
-    let pays = [];
-    for (let country of countries) {
-        if(country.borders !== undefined){
-            for (let voisin of country.borders) {
-                if (paysContinent.has(voisin) && paysContinent.get(voisin) !== country.continent) {
-                    pays.push(country.name); // append ne fonctionne pas sur les tableaux d'apres chatgpt car mon append ne fonctionne pas
-                }
+    // utilisation de all_countries de la classe Country 
+    const allCountries = Country.all_countries;
+
+    const countriesOutside = allCountries.filter(country => {
+        const borders = country.neighbors;
+        // au moins un pays frontalier n'est pas dans le même continent
+        return borders.some(border => {
+            if (border != null && border.continent !== country.continent) {
+                return true;
             }
-        }
-        else{
-            console.log("aucun borders")
+            return false;
+        });
+    });
+
+    console.table(countriesOutside);
+}
+
+// Appel de la fonction
+outsideTheContinent();
+
+// Q2 - moreNeighbors() : Tableau des pays ayant le plus grand nombre de voisins. Affichez aussi les voisins.
+
+function moreNeighbors() {
+    // utilisation de all_countries de la classe Country
+    const allCountries = Country.all_countries;
+    let maxNeighbors = 0;
+    for (const country of allCountries) {
+        const borders = country.neighbors;
+        if (country.getNbNeighbors() >= maxNeighbors) {
+            maxNeighbors = borders.length;
+            console.log("Pays = ", country.name," NB = ", country.getNbNeighbors());    
+            console.log("Voisins = ", country.getNeighbors(country.neighbors));
         }
         
     }
-    console.table([...new Set(pays)]); // Supprime les doublons
-    return pays;
+    
+    const countriesWithMaxNeighbors = allCountries.filter(country => country.getNbNeighbors() === maxNeighbors);
+    console.table(countriesWithMaxNeighbors);
 }
-outsideTheContinent();
 
-// Q2 : 
-// Q3 : 
-// Q4 : 
-// Q5 : 
-// Q6 : 
-// Q7 : 
-// Q8 : 
+// Appel de la fonction
+moreNeighbors();
+
+
