@@ -1,3 +1,4 @@
+
 /*Tests 
 Écrivez  des  fonctions  permettant  de  répondre  aux  questions  suivantes.  Les  résultats 
 doivent s’afficher dans la console du navigateur à l’aide de console.table() si ça s’y 
@@ -48,4 +49,5 @@ function moreNeighbors() {
 
 // Appel de la fonction
 moreNeighbors();
+
 
