@@ -21,6 +21,7 @@ class Country {
     population;
     area;
     neighbors;
+    TopLevelDomains;
     static all_countries = [];
 
     constructor (alpha3, name, capital, continent, population, area, neighbors) {

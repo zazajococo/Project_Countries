@@ -4,10 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Test</title>
+    <style>
+        html{
+            height: 100%; 
+            margin: 0; 
+        }
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+
+            background-image: url('floral-pattern.png');
+            background-size: cover; 
+            font-family: 'Comic Sans MS', cursive, sans-serif; 
+            color: #4a2c6d; 
+        }
+
+        h1, h2, h3 {
+            color: #ff6f61; 
+            text-align: center; 
+        }
+
+        a {
+            color: #ff4081;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            background-color: #ff6f61; 
+            color: white;
+            border: none;
+            border-radius: 25px; 
+            padding: 10px 20px; 
+            cursor: pointer; 
+            margin: 5px; 
+        }
+
+        button:hover {
+            background-color: #ff4081; 
+        }
+
+        .container {
+            position: relative;
+            max-width: 800px;
+            margin: 0;
+            padding: 20px; 
+            border: 2px solid #ff6f61; 
+            border-radius: 15px;
+            background-color: #f8e1f4; 
+        }
+    </style>
 </head>
 <body>
+    <div class="container">
+        <h1>Tests des pays</h1>
+        <button onclick="outsideTheContinent()">Q1 - Pays hors du continent</button>
+        <button onclick="moreNeighbors()">Q2 - Plus de voisins</button>
+        <button onclick="neighborless()">Q3 - Pays sans voisins</button>
+        <button onclick="moreLanguages()">Q4 - Plus de langues</button>
+        <button onclick="withCommonLanguage()">Q5 - Langue commune</button>
+        <button onclick="withoutCommonCurrency()">Q6 - Sans monnaie commune</button>
+        <button onclick="sortingDecreasingDensity()">Q7 - Densité décroissante</button>
+        <button onclick="moreTopLevelDomains()">Q8 - Plus de TLD</button>
+    </div>
+
     <script src="../data/countries.js"></script>
     <script src="../data/class_country.js"></script>
-    <script SRC="test.js"></script>
+    <script src="test.js"></script>
 </body>
 </html>
