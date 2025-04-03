@@ -1,0 +1,97 @@
+<!-- Tous les pays 
+À partir de template.html, créez une page countries_v1.html (+ script_v1.js) qui 
+affiche la liste de tous les pays provenant du tableau all_countries. Cette fois-ci, les 
+<tr>  de  la  <table>  vont  être  construits  dynamiquement,  en  énumérant  les  données 
+JSON et en manipulant le DOM pour ajouter vos <tr>. -->
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template - Informations sur un Pays</title>
+    <style>
+        html {
+        height: 100%; 
+        margin: 0; 
+    }
+h1, h2, h3 {
+    color: #ff6f61; 
+    text-align: center; 
+}
+body {
+            height: auto;
+            width: 100%;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: #f8e1f4;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #4a2c6d;
+        }
+
+.table-container {
+    margin: 0;
+    width: 80%;
+    padding: 20px; 
+    max-height: max-content;
+    border: 2px solid #ff6f61;
+    border-radius: 10px;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0;
+    border: 2px solid #ff6f61;
+    border-radius: 10px;
+    overflow: hidden;
+    background-color: #fff;
+}
+
+th, td {
+    border: 1px solid #ff6f61;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #ff6f61;
+    color: white;
+}
+
+img {
+    height: 30px;
+}
+
+    </style>
+</head>
+<body>
+    <h1>Tous les pays</h1>
+    <div class="table-container">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nom en français</th>
+                    <th>Population</th>
+                    <th>Surface (km²)</th>
+                    <th>Densité de population (hab/km²)</th>
+                    <th>Continent d’appartenance</th>
+                    <th>Drapeau</th>
+                </tr>
+            </thead>
+            <tbody id="countriesTableBody">
+            </tbody>
+        </table>
+    </div>
+    
+</body>
+<script src="../data/countries.js"></script>
+<script src="../data/class_country.js"></script>
+<script src="script_v1.js"></script>
+</html>

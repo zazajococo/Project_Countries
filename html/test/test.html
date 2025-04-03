@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<<<<<<< HEAD
     <title>Test</title>
     <style>
-        html{
+        html {
             height: 100%; 
             margin: 0; 
         }
         body {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             height: 100%;
             width: 100%;
-
             background-image: url('floral-pattern.png');
             background-size: cover; 
             font-family: 'Comic Sans MS', cursive, sans-serif; 
@@ -60,26 +59,62 @@
             border-radius: 15px;
             background-color: #f8e1f4; 
         }
+
+        #output {
+            margin-top: 20px; 
+            max-height: 300px; 
+            overflow-y: auto; 
+            display: none; /* Masquer le div par défaut */
+            background-color: #f0f0f0; 
+            padding: 10px; 
+            border: 1px solid #ccc; 
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Tests des pays</h1>
-        <button onclick="outsideTheContinent()">Q1 - Pays hors du continent</button>
-        <button onclick="moreNeighbors()">Q2 - Plus de voisins</button>
-        <button onclick="neighborless()">Q3 - Pays sans voisins</button>
-        <button onclick="moreLanguages()">Q4 - Plus de langues</button>
-        <button onclick="withCommonLanguage()">Q5 - Langue commune</button>
-        <button onclick="withoutCommonCurrency()">Q6 - Sans monnaie commune</button>
-        <button onclick="sortingDecreasingDensity()">Q7 - Densité décroissante</button>
-        <button onclick="moreTopLevelDomains()">Q8 - Plus de TLD</button>
+        <button onclick="handleButtonClick(outsideTheContinent)">Q1 - Pays hors du continent</button>
+        <button onclick="handleButtonClick(moreNeighbors)">Q2 - Plus de voisins</button>
+        <button onclick="handleButtonClick(neighborless)">Q3 - Pays sans voisins</button>
+        <button onclick="handleButtonClick(moreLanguages)">Q4 - Plus de langues</button>
+        <button onclick="handleButtonClick(withCommonLanguage)">Q5 - Langue commune</button>
+        <button onclick="handleButtonClick(withoutCommonCurrency)">Q6 - Sans monnaie commune</button>
+        <button onclick="handleButtonClick(sortingDecreasingDensity)">Q7 - Densité décroissante</button>
+        <button onclick="handleButtonClick(moreTopLevelDomains)">Q8 - Plus de TLD</button>
+    </div>
+
+    <div id="output" class="container">
+        <!-- La sortie de la console sera affichée ici -->
     </div>
 
     <script src="../data/countries.js"></script>
     <script src="../data/class_country.js"></script>
     <script src="test.js"></script>
+    <script>
+        // Rediriger console.log vers l'élément HTML
+        const outputDiv = document.getElementById('output');
+        const originalConsoleLog = console.log;
+        const originalConsoleTable = console.table;
+
+        // Fonction pour gérer le clic sur un bouton
+        function handleButtonClick(func) {
+            outputDiv.style.display = 'block'; // Affiche le div
+            outputDiv.innerHTML = ""; // Efface le contenu précédent
+            func(); // Appelle la fonction associée au bouton
+        }
+
+        console.log = function(message) {
+            outputDiv.innerHTML = ""; // Efface le contenu précédent
+            originalConsoleLog(message); // Appeler la console d'origine
+            outputDiv.innerHTML += message + '<br>'; // Ajouter le message à l'élément HTML
+        };
+
+        console.table = function(data) {
+            outputDiv.innerHTML = ""; // Efface le contenu précédent
+            originalConsoleTable(data); // Appeler la console d'origine
+            outputDiv.innerHTML += '<pre>' + JSON.stringify(data, null, 2) + '</pre>'; // Ajouter le tableau à l'élément HTML
+        };
+    </script>
 </body>
-=======
-  </head>
->>>>>>> 53348cb7aff322827681e6a946df2a3db840293d
 </html>
