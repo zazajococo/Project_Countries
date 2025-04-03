@@ -1,0 +1,33 @@
+name: Sync Upstream and Fork
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Exécute tous les heures
+  workflow_dispatch:  # Permet un déclenchement manuel
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout upstream (repo père)
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+     
+
+      - name: Add remotes
+        run: |
+          git remote add fork https://github.com/LaSyCa/Project_Countries.git
+          git fetch fork
+
+      - name: Merge fork into upstream (repo père)
+        run: |
+          git checkout main
+          git merge fork/main --no-edit
+          git push origin main  # Pousse dans le repo père
+
+      - name: Push upstream changes to fork
+        run: |
+          git checkout main
+          git push https://${{ secrets.UPSTREAM_PAT }}@github.com/Project_Countries.git

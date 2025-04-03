@@ -14,6 +14,8 @@
 
 class Currency{
 
+    static all_currencies = {};
+
     constructor (code, nom, symbole) {
         this.code = code;
         this.nom = nom; 
@@ -46,28 +48,28 @@ class Currency{
     }
 
     toString() { 
-        return `Monnaie : ${this.GetCode}, ${this.GetNom}, ${this.GetSymbole}` // Monnaie a enlever pour respecter la consigne
+        return `${this.GetCode}, ${this.GetNom}, ${this.GetSymbole}` 
     }
 
 }
 
  // Clé : valeur, ex : code : EUR
  function fill_currencies() {
-    const all_currencies = countries.map(country => {
+    const all_currencies = {};
+    countries.forEach(country => {
         if (country.currencies && country.currencies.length > 0) {
             country.currencies.forEach(currencyData => {
-                //if (!all_currencies.has(code)) {
-                    const currency = new Currency(currencyData[i].code, currencyData[i].name, currencyData[i].symbol);
-                    console.log(currency.toString()); 
-                    return currency;
-                //}
+                if (!all_currencies[currencyData.code]) {
+                    all_currencies[currencyData.code] = new Currency(currencyData.code, currencyData.name, currencyData.symbol);
+                    console.log(all_currencies[currencyData.code].toString()); 
+                }
             })
-            
+                
         }
         else{
             console.log("Aucune monnaie")
         }
-    });
+    })
 }
 
 

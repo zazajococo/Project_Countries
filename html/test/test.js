@@ -1,3 +1,4 @@
+
 /*Tests 
 Écrivez  des  fonctions  permettant  de  répondre  aux  questions  suivantes.  Les  résultats 
 doivent s’afficher dans la console du navigateur à l’aide de console.table() si ça s’y 
@@ -49,6 +50,7 @@ function moreNeighbors() {
 // Appel de la fonction
 //moreNeighbors();
 
+<<<<<<< HEAD
 // Q3 - neighborless() : Tableau des pays n'ayant aucun voisin.
 
 function neighborless() {
@@ -79,3 +81,6 @@ function moreTopLevelDomains() {
 
 // Appel de la fonction
 //moreTopLevelDomains();
+=======
+
+>>>>>>> 53348cb7aff322827681e6a946df2a3db840293d

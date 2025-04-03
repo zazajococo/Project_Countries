@@ -1,0 +1,22 @@
+name: Sync Upstream and Fork
+
+on:
+  schedule:
+    - cron: '0 * * * *'  # Exécute tous les heures
+  workflow_dispatch:  # Permet un déclenchement manuel
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout upstream (repo père)
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+     
+
+      - name: Push upstream changes to fork
+        run: |
+          git checkout main
+          git push https://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@github.com/Project_Countries.git
