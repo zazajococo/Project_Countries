@@ -1,8 +1,6 @@
 name: Sync Upstream and Fork
 
 on:
-  schedule:
-    - cron: '0 * * * *'  # Exécute tous les heures
   workflow_dispatch:  # Permet un déclenchement manuel
 
 jobs:
