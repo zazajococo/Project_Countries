@@ -64,7 +64,7 @@ function updatePaginationButtons() {
 
     if (currentPage > 1) {
         const prevButton = document.createElement('button');
-        prevButton.textContent = 'PRECmoi';
+        prevButton.textContent = 'PREC';
         prevButton.onclick = () => changePage(currentPage - 1);
         paginationContainer.appendChild(prevButton);
     }
