@@ -5,44 +5,85 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accueil - Mon Projet</title>
     <style>
+        html {
+            height: 100%; 
+            margin: 0; 
+        }
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
-            color: #333;
-            text-align: center;
-            padding: 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 100%;
+            background-image: url('./html/test/floral-pattern.png');
+            background-size: cover; 
+            font-family: 'Comic Sans MS', cursive, sans-serif; 
+            color: #4a2c6d; 
         }
-        h1 {
-            color: #4a2c6d;
+
+        h1, h2, h3 {
+            color: #ff6f61; 
+            text-align: center; 
         }
-        .button {
-            display: inline-block;
-            margin: 10px;
-            padding: 15px 30px;
-            font-size: 16px;
-            color: white;
-            background-color: #ff6f61;
-            border: none;
-            border-radius: 5px;
+
+        a {
+            color: #ff4081;
             text-decoration: none;
-            transition: background-color 0.3s;
         }
-        .button:hover {
-            background-color: #ff4081;
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        button {
+            background-color: #ff6f61; 
+            color: white;
+            border: none;
+            border-radius: 25px; 
+            padding: 10px 20px; 
+            cursor: pointer; 
+            margin: 5px; 
+        }
+
+        button:hover {
+            background-color: #ff4081; 
+        }
+
+        .container {
+            position: relative;
+            max-width: 800px;
+            margin: 0;
+            padding: 20px; 
+            border: 2px solid #ff6f61; 
+            border-radius: 15px;
+            background-color: #f8e1f4; 
+        }
+        footer {
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            background-color: #4a2c6d;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            border-top: 2px solid #ff6f61;
         }
     </style>
 </head>
 <body>
-    <h1>Bienvenue sur mon projet</h1>
-    <p>Cliquez sur les boutons ci-dessous pour accéder aux différentes pages :</p>
+    <div class="container">
+        <h1>Bienvenue sur notre projet !</h1>
+        <p>Cliquez sur les boutons ci-dessous pour accéder aux différentes pages :</p>
     
-    <div>
-        <a href="html/v1/countries_v1.html" class="button">Version 1</a>
-        <a href="html/v2/countries_v2.html" class="button">Version 2</a>
-        <a href="html/v3/countries_v3.html" class="button">Version 3</a>
-        <a href="html/v4/countries_v4.html" class="button">Version 4</a>
-        <a href="html/v5/countries_v5.html" class="button">Version 5</a>
-        <a href="html/test/test.html" class="button">Test Page</a>
+        <a href="html/template.html">Template - Modèle</a>
+        <a href="html/v1/countries_v1.html" class="button">Version 1 - Tous les pays</a>
+        <a href="html/v2/countries_v2.html" class="button">Version 2 - Pagination</a>
+        <a href="html/v3/countries_v3.html" class="button">Version 3 - Détails</a>
+        <a href="html/v4/countries_v4.html" class="button">Version 4 - Filtrage</a>
+        <a href="html/v5/countries_v5.html" class="button">Version 5 - Tri</a>
+        <a href="html/test/test.html" class="button">Test - Page des tests</a>
     </div>
     
     <footer>
