@@ -22,9 +22,16 @@ class Country {
     area;
     neighbors;
     TopLevelDomains;
+    nativename;
+    currencies;
+    languages;
+    timezones;
+    subregion;
+    independant;
+
     static all_countries = [];
 
-    constructor (alpha3, name, capital, continent, population, area, neighbors) {
+    constructor (alpha3, name, capital, continent, population, area, neighbors, currencies, languages, timezones, nativename, subregion, independant) {
         this.alpha3 = alpha3;
         this.name = name;
         this.capital = capital;
@@ -32,7 +39,14 @@ class Country {
         this.population = population;
         this.area = area;
         this.neighbors = neighbors;
+        this.currencies = currencies;
+        this.languages = languages;
+        this.timezones = timezones;
+        this.nativename = nativename;
+        this.subregion = subregion;
+        this.independant = independant;
     }
+    
 
     toString() {
         return `${this.alpha3}, ${this.name}, ${this.capital}, ${this.continent}, ${this.population}, ` + this.getNeighbors(this.neighbors);
@@ -74,7 +88,14 @@ class Country {
                 country.region ? country.region : "No region", 
                 country.population ? country.population : "No population", 
                 country.area ? country.area : "No area",
-                country.borders ? country.borders : [])
+                country.borders ? country.borders : [],
+                country.currencies ? country.currencies : [],
+                country.languages ? country.languages : [],
+                country.timezones ? country.timezones : [],
+                country.nativeName ? country.nativeName : "No native name",
+                country.subregion ? country.subregion : "No subregion",
+                country.independent,
+            )
             
             return c;
             }
