@@ -68,7 +68,7 @@ function showDetails(country) {
     const borders = document.createElement('td');
 
     code.textContent = country.alpha3 || 'N/A';
-    if (country.languages) {
+    if (country.getLanguages) {
         for (let l of country.languages) {
             language.textContent += l.name;
             if (l.name != country.languages[country.languages.length - 1].name) {
@@ -79,7 +79,7 @@ function showDetails(country) {
         language.textContent = 'N/A';
     }
 
-    if (country.currencies) {
+    if (country.getCurrencies) {
         for (let c of country.currencies) {
             monnaie.textContent += c.name + ' (' + c.symbol + ')';
             if (c.name != country.currencies[country.currencies.length - 1].name) {

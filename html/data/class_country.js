@@ -136,12 +136,30 @@ class Country {
     //  ●  getCurrencies() : retourne un tableau des monnaies (objet Currencies)
 
     getCurrencies(){
+        const currencies = Currency.all_currencies;
+        const cu = [];
+        for (c of this.currencies) {
+            for (let i = 0; i < currencies.length; i++) {
+                if (c === currencies[i].code) {
+                    cu.push(currencies[i]);
+                }
+            }
+        }
         return null;
     }
 
     // getLanguage() : retourne un tableau des langues (objet Languages
 
     getLanguage() {
+        const languages = Language.all_languages;
+        const lang = [];
+        for (l of this.languages) {
+            for (let j = 0; j < languages.length; j++) {
+                if (l.name === languages[j].name) {
+                    lang.push(languages[j]);
+                }
+            }
+        }
         return null;
     }
 }
