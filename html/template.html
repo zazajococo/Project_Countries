@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template - Informations sur un Pays</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8e1f4;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            color: #4a2c6d;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin: 20px;
+            border: 2px solid #ff6f61;
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: #fff;
+        }
+
+        th, td {
+            border: 1px solid #ff6f61;
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #ff6f61;
+            color: white;
+        }
+
+        img {
+            height: 30px; /* Ajustez la taille de l'image du drapeau */
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Nom en français</th>
+                <th>Population</th>
+                <th>Surface (km²)</th>
+                <th>Densité de population (hab/km²)</th>
+                <th>Continent d’appartenance</th>
+                <th>Drapeau</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>France</td>
+                <td>67,06 millions</td>
+                <td>551 695</td>
+                <td>121</td>
+                <td>Europe</td>
+                <td><img src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" alt="Drapeau de la France"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

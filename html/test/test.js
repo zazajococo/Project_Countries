@@ -25,7 +25,7 @@ function outsideTheContinent() {
 }
 
 // Appel de la fonction
-outsideTheContinent();
+//outsideTheContinent();
 
 // Q2 - moreNeighbors() : Tableau des pays ayant le plus grand nombre de voisins. Affichez aussi les voisins.
 
@@ -48,6 +48,60 @@ function moreNeighbors() {
 }
 
 // Appel de la fonction
-moreNeighbors();
+//moreNeighbors();
+
+// Q3 - neighborless() : Tableau des pays n'ayant aucun voisin.
+
+function neighborless() {
+    // utilisation de all_countries de la classe Country
+    const allCountries = Country.all_countries;
+    const countriesWithoutNeighbors = allCountries.filter(country => country.getNbNeighbors() === 0);
+    console.table(countriesWithoutNeighbors);
+}
+
+// Q4 - moreLanguages() : Tableau des pays parlant le plus de langues. Affichez aussi les langues (objets Language). 
+
+function moreLanguages() {
+    console.log("Comming soon !");
+}
+
+// Q5 - withCommonLanguage() : Tableau des pays ayant au moins un voisin parlant l’une de  ses  langues.  Affichez  aussi  les  pays  voisins  (objets  Country)  et  les  langues  en question (objets Language). 
+
+function withCommonLanguage() {
+    console.log("Comming soon !");
+}
+
+// Q6 - withoutCommonCurrency() : Tableau  des  pays  sans  aucun  voisin ayant au moins une de ses monnaies. 
+
+function withoutCommonCurrency() {
+    console.log("Comming soon !");
+}
+
+// Q7 - sortingDecreasingDensity() : Tableau  des  pays  triés  par  ordre  décroissant  de densité de population. 
+ 
+function sortingDecreasingDensity() {
+    console.log("Comming soon !");
+}
 
 
+// Appel de la fonction
+//neighborless();
+
+// Q8 - moreTopLevelDomains() : Tableau des pays ayant le plusieurs Top Level Domains Internet.
+function moreTopLevelDomains() {
+    const MultipleTopLevelDomains = [];
+    for (const country of countries) {
+        if (country.topLevelDomain.length > 1) {
+            for (c of Country.all_countries) {
+                if (c.alpha3 === country.alpha3Code) {
+                    MultipleTopLevelDomains.push(c);
+                    console.log("Pays= ", c.name, " TLD = ", country.topLevelDomain);
+                }
+            }
+        }
+    }
+    console.table(MultipleTopLevelDomains);
+}
+
+// Appel de la fonction
+//moreTopLevelDomains();

@@ -1,0 +1,200 @@
+<!-- Tous les pays 
+À partir de template.html, créez une page countries_v1.html (+ script_v1.js) qui 
+affiche la liste de tous les pays provenant du tableau all_countries. Cette fois-ci, les 
+<tr>  de  la  <table>  vont  être  construits  dynamiquement,  en  énumérant  les  données 
+JSON et en manipulant le DOM pour ajouter vos <tr>. -->
+
+    <!DOCTYPE html>
+    <html lang="fr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Template - Informations sur un Pays</title>
+        <style>
+            html {
+            height: 100%; 
+            margin: 0; 
+        }
+    h1, h2, h3 {
+        color: #ff6f61; 
+        text-align: center; 
+    }
+    body {
+            height: auto; 
+            width: 100%;
+            overflow-y: auto; 
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            background-color: #f8e1f4;
+            font-family: 'Comic Sans MS', Bonjoicursive, sans-serif;
+            color: #4a2c6d;
+    }
+    button:hover {
+        background-color: #ff4081; 
+    }
+    .table-container {
+        margin: 0 auto;
+        width: 80%;
+        padding: 20px; 
+        max-height: max-content;
+        border: 2px solid #ff6f61;
+        border-radius: 10px;
+        background-color: #fff;
+        display: flex;
+        justify-content: center;
+    }
+    
+    table {
+        border-collapse: collapse;
+        width: 100%; 
+        margin: 0;
+        border: 2px solid #ff6f61;
+        border-radius: 10px;
+        overflow: hidden;
+        background-color: #fff;
+    }
+    
+    th, td {
+        border: 1px solid #ff6f61;
+        padding: 10px;
+        text-align: left;
+    }
+    
+    th {
+        background-color: #ff6f61;
+        color: white;
+    }
+    
+    img {
+        height: 30px;
+    }
+    
+    #pagination {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin: 20px;
+    }
+    
+    button {
+        background-color: #ff6f61; 
+        color: white;
+        border: none;
+        border-radius: 25px; 
+        padding: 10px 20px; 
+        cursor: pointer; 
+        margin: 5px; 
+        float: right;
+    }
+
+    .details-container {
+            display: none; /* Masqué par défaut */
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        .flag-container {
+            display: none; /* Masqué par défaut */
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            padding: 10px 10px ;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            z-index: 1000;
+        }
+        .flag-container img {
+            width: 100%;
+            height: auto;
+            max-height: 750px;
+            margin: 10px auto;
+        }
+
+        .flag-content {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .details-content {
+            background-color: #4a2c6d;
+            padding: 20px;
+            margin: auto 0;
+            border-radius: 10px;
+        }
+        .details-content h2 {
+            color: white;
+        }
+        .flag-large {
+            width: 200px; /* Ajustez la taille du drapeau */
+        }
+        </style>
+    </head>
+    <body>
+        <h1>Tous les pays</h1>
+        <div id="detailsContainer" class="details-container">
+            <div class="details-content">
+                <button id="closeDetails">&times;</button>
+                <h2 id="countryName"></h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Nom natif</th>
+                            <th>Région</th>
+                            <th>Frontière(s)</th>
+                            <th>Fuseau(x) horaire(s)</th>
+                            <th>Monnaie(s)</th>
+                            <th>Langue(s)</th>
+                            <th>Indépendance</th>
+                        </tr>
+                    </thead>
+                    <tbody id="detailsTableBody">
+                    </tbody>
+                </table>
+            </div>     
+        </div>
+        <div id="flagContainer" class="flag-container">
+            <div class="flag-content">
+                <button id="closeFlag">&times;</button>
+                <img id="largeFlag" class="flag-large" src="" alt="Drapeau en grand" />
+            </div>
+        </div>
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nom en français</th>
+                        <th>Capital</th>
+                        <th>Population</th>
+                        <th>Surface (km²)</th>
+                        <th>Densité de population (hab/km²)</th>
+                        <th>Continent d’appartenance</th>
+                        <th>Drapeau</th>
+                    </tr>
+                </thead>
+                <tbody id="countriesTableBody">
+                </tbody>
+            </table>
+        </div>
+        <div id="pagination">
+            <p>pagination</p>
+        </div>
+        
+    </body>
+    <script src="../data/countries.js"></script>
+    <script src="../data/class_country.js"></script>
+    <script src="script_v3.js"></script>
+    </html>
+
+    
