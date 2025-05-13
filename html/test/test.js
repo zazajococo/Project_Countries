@@ -90,14 +90,10 @@ function sortingDecreasingDensity() {
 // Q8 - moreTopLevelDomains() : Tableau des pays ayant le plusieurs Top Level Domains Internet.
 function moreTopLevelDomains() {
     const MultipleTopLevelDomains = [];
-    for (const country of countries) {
+    for (const country of Country.all_countries) {
         if (country.topLevelDomain.length > 1) {
-            for (c of Country.all_countries) {
-                if (c.alpha3 === country.alpha3Code) {
-                    MultipleTopLevelDomains.push(c);
-                    console.log("Pays= ", c.name, " TLD = ", country.topLevelDomain);
-                }
-            }
+            MultipleTopLevelDomains.push(c);
+            console.log("Pays= ", country.name, " TLD = ", country.topLevelDomain);
         }
     }
     console.table(MultipleTopLevelDomains);
