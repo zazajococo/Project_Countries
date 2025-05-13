@@ -91,9 +91,9 @@ function sortingDecreasingDensity() {
 function moreTopLevelDomains() {
     const MultipleTopLevelDomains = [];
     for (const country of Country.all_countries) {
-        if (country.topLevelDomain.length > 1) {
+        if (country.getNbTLD() > 1) {
             MultipleTopLevelDomains.push(c);
-            console.log("Pays= ", country.name, " TLD = ", country.topLevelDomain);
+            console.log("Pays= ", country.name, " TLD = ", country.topLevelDomains);
         }
     }
     console.table(MultipleTopLevelDomains);
