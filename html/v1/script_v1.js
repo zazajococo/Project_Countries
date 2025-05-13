@@ -1,7 +1,17 @@
+/* 
+Création du body de la table
+*/
 const tBody = document.getElementById('countriesTableBody');
 
+/* 
+Tous les pays
+*/
 const countriesAll = Country.all_countries;
 
+/* 
+Création d'un tableau de pays avec toute ses informations
+1 ligne = 1 pays
+*/
 countriesAll.forEach(country => {
     const row = document.createElement('tr');
     const name = document.createElement('td');
@@ -33,5 +43,8 @@ countriesAll.forEach(country => {
     row.appendChild(continent);
     row.appendChild(flag);
 
+    /* 
+    Mise à jour du body de la table
+    */
     tBody.appendChild(row);
 });

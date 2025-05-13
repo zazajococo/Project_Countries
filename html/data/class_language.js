@@ -1,19 +1,3 @@
-// La classe Language 
-// Vous allez maintenant traiter les langues, de façon similaire aux monnaies. 
-// On s’intéresse au code iso639_2 et au nom (en anglais). 
-// Q1  -  A  partir  de  votre  analyse  de  la  structure  JSON  d’une  langue,  créez  une  classe 
-// Language  pour  y  stocker  vos  données  de  travail.  Prévoyez  une  fonction  toString() 
-// synthétique qui retourne une chaîne (sans \n) contenant : 
-// ●  Le code iso639_2 
-// ●  Le nom (anglais) 
-// Exemple à respecter : 
-// French (fra) 
- 
-// Q2 - Écrivez une fonction fill_languages() qui, à partir de la source de données, crée 
-// des objets Language que vous stockez dans un tableau associatif (variable de classe) 
-// nommé all_languages dont les clés sont les valeurs trouvées champ iso639_2 de la propriété
-// languages, et les valeurs sont des objets Language.
-
 class Language{
 
     static all_languages = {};
@@ -40,12 +24,20 @@ class Language{
         this.nom = nom;
     }
 
+    /* 
+    Méthode toString()
+    Permet de retourner les informations sur une langue
+     */
     toString() { 
         return `${this.GetNom} (${this.GetCode})` 
     }
 
 }
 
+/* 
+Function fill_languages()
+Permet de lis la source json countries, créer des objets Languages et les stockes dans le tableau associatif all_languages
+*/
  function fill_languages() {
     const all_languages = {};
     countries.forEach(country => {

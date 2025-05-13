@@ -1,14 +1,13 @@
-/* Tous les pays 
-À partir de template.html, créez une page countries_v1.html (+ script_v1.js) qui 
-affiche la liste de tous les pays provenant du tableau all_countries. Cette fois-ci, les 
-<tr>  de  la  <table>  vont  être  construits  dynamiquement,  en  énumérant  les  données 
-JSON et en manipulant le DOM pour ajouter vos <tr */
-
 const tBody = document.getElementById('countriesTableBody');
 const paginationContainer = document.getElementById('pagination'); // Utilisez le bon ID
 const itemsPerPage = 25; 
 let currentPage = 1;
 
+/* 
+Function displayCountries(page)
+Permet d'afficher le tableau de pays avec une pagination 
+1 page = 25 pays
+*/
 function displayCountries(page) {
     tBody.innerHTML = ""; 
     const start = (page - 1) * itemsPerPage;
@@ -48,15 +47,23 @@ function displayCountries(page) {
     }); 
 }
 
+/* 
+Function changePage(page)
+Permet de changer de page 
+*/
 function changePage(page) {
     currentPage = page;
     displayCountries(currentPage);
     updatePaginationButtons();
 }
 
+// Appel de la fonction 
 displayCountries(currentPage);
 
-
+/* 
+Function updatePaginationButtons()
+Permet d'afficher ou non les boutons PREC/SUIV
+*/
 function updatePaginationButtons() {
     const totalPages = Math.ceil(Country.all_countries.length / itemsPerPage);
     console.log("tot = ", totalPages)
@@ -78,4 +85,5 @@ function updatePaginationButtons() {
     }
 }
 
+// Appel de la fonction
 updatePaginationButtons();

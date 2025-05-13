@@ -12,14 +12,20 @@ const continentFilter = document.getElementById('continentFilter');
 const languageFilter = document.getElementById('languageFilter');
 const paysFilter = document.getElementById('paysFilter');
 
-// Variable pour stocker les résultats filtrés
-let paysFiltrés = [];
+// Variable pour stocker les pays filtrés
+let tabCountryFilters = [];
 
-function displayCountries(page, data = Country.all_countries) {
+/* 
+Function displayCountries(page)
+Permet d'afficher le tableau de pays avec une pagination
+1 page = 25 pays
+Ajout d'un paramètre countryFilters qui stocke les pays filtrés ou tous les pays
+*/
+function displayCountries(page, countryFilters = Country.all_countries) {
     tBody.innerHTML = "";
     const start = (page - 1) * itemsPerPage;
     const end = start + itemsPerPage;
-    const countriesToDisplay = data.slice(start, end);
+    const countriesToDisplay = countryFilters.slice(start, end);
 
     countriesToDisplay.forEach(country => {
         const row = document.createElement('tr');
@@ -63,9 +69,14 @@ function displayCountries(page, data = Country.all_countries) {
         tBody.appendChild(row);
     });
 
-    updatePaginationButtons(data);
+    // Appel de la fonction
+    updatePaginationButtons(countryFilters);
 }
 
+/* 
+Function showDetails(country)
+Permet d'afficher le détails d'un pays lors d'un click sur la ligne coresspondante
+*/
 function showDetails(country) {
     detailsTableBody.innerHTML = "";
     document.getElementById('countryName').textContent = country.name;
@@ -113,6 +124,10 @@ function showDetails(country) {
     detailsContainer.style.display = 'block';
 }
 
+/* 
+Function showLargeFlag(flagSrc)
+Permet d'afficher le drapeau en grand sur la page
+*/
 function showLargeFlag(flagSrc) {
     largeFlag.src = flagSrc;
     flagContainer.style.display = 'block';
@@ -126,14 +141,24 @@ closeDetails.onclick = () => {
     detailsContainer.style.display = 'none';
 };
 
+/* 
+Function changePage(page)
+Permet de changer de page 
+*/
 function changePage(page) {
     currentPage = page;
-    const data = paysFiltrés.length ? paysFiltrés : Country.all_countries;
-    displayCountries(currentPage, data);
+    const countryFilters = tabCountryFilters
+.length ? tabCountryFilters
+ : Country.all_countries;
+    displayCountries(currentPage, countryFilters);
 }
 
-function updatePaginationButtons(data = Country.all_countries) {
-    const totalPages = Math.ceil(data.length / itemsPerPage);
+/* 
+Function updatePaginationButtons()
+Permet d'afficher ou non les boutons PREC/SUIV
+*/
+function updatePaginationButtons(countryFilters = Country.all_countries) {
+    const totalPages = Math.ceil(countryFilters.length / itemsPerPage);
     paginationContainer.innerHTML = "";
 
     if (currentPage > 1) {
@@ -151,9 +176,13 @@ function updatePaginationButtons(data = Country.all_countries) {
     }
 }
 
-// Initial display
+// Appel de la fonction
 displayCountries(currentPage);
 
+/* 
+Function filter
+Permet de récupérer filtres que l'utilisateur souhaite
+*/
 function filter() {
     const continents = new Set(countries.map(country => country.region).filter(Boolean));
     [...continents].sort().forEach(continent => {
@@ -177,12 +206,17 @@ function filter() {
     paysFilter.addEventListener('input', applyFilters);
 }
 
+/* 
+Function applyFilters()
+Permet d'appliquer les filtres au tableau et d'appeler la fonction displayCountries(currentPage, tabCountryFilters) pour afficher seulement les pays filtrés
+*/
 function applyFilters() {
     const selectedContinent = continentFilter.value;
     const selectedLanguage = languageFilter.value;
     const selectedPays = paysFilter.value.trim().toLowerCase();
 
-    paysFiltrés = countries.filter(pays => {
+    tabCountryFilters
+ = countries.filter(pays => {
         const matchContinent = !selectedContinent || pays.region === selectedContinent;
         const matchLanguage = !selectedLanguage || pays.languages.some(lang => lang.name === selectedLanguage);
         const matchPays = !selectedPays || pays.translations.fr.toLowerCase().includes(selectedPays) || pays.name.toLowerCase().includes(selectedPays) ;
@@ -190,7 +224,9 @@ function applyFilters() {
     });
 
     currentPage = 1;
-    displayCountries(currentPage, paysFiltrés);
+    displayCountries(currentPage, tabCountryFilters
+    
+    );
 }
-
+// Appel de la fonction
 filter();
