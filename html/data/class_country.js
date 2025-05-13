@@ -29,6 +29,7 @@ class Country {
     subregion;
     independant;
 
+
     static all_countries = [];
 
     constructor (alpha3, name, capital, continent, population, area, neighbors, currencies, languages, timezones, nativename, subregion, independant) {
@@ -95,6 +96,7 @@ class Country {
                 country.nativeName ? country.nativeName : "No native name",
                 country.subregion ? country.subregion : "No subregion",
                 country.independent,
+                country.TopLevelDomains ? country.TopLevelDomains : []
             )
             
             return c;
@@ -140,8 +142,8 @@ class Country {
         const cu = [];
         for (c of this.currencies) {
             for (let i = 0; i < currencies.length; i++) {
-                if (c === currencies[i].code) {
-                    cu.push(currencies[i]);
+                if (c.code === currencies[i].code) {
+                    cu.push(c);
                 }
             }
         }
@@ -156,7 +158,7 @@ class Country {
         for (l of this.languages) {
             for (let j = 0; j < languages.length; j++) {
                 if (l.name === languages[j].name) {
-                    lang.push(languages[j]);
+                    lang.push(l);
                 }
             }
         }
