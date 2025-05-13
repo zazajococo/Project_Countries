@@ -79,8 +79,6 @@ class Country {
         return this.neighbors.length;
     }
 
-
-
     /* 
     Function fill_countries()
     Permet de lis la source json countries, créer des objets Countries et les stockes dans le tableau associatif all_countries
