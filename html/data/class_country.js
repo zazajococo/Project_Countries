@@ -97,7 +97,7 @@ class Country {
                 country.nativeName ? country.nativeName : "No native name",
                 country.subregion ? country.subregion : "No subregion",
                 country.independent,
-                country.topLevelDomain ? country.topLevelDomain : []
+                country.topLevelDomains ? country.topLevelDomains : []
             )
             
             return c;
