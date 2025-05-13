@@ -12,12 +12,12 @@ class Country {
     timezones;
     subregion;
     independant;
-    topLevelDomains;
+    topLevelDomain;
 
 
     static all_countries = [];
 
-    constructor (alpha3, name, capital, continent, population, area, neighbors, currencies, languages, timezones, nativename, subregion, independant, topLevelDomains) {
+    constructor (alpha3, name, capital, continent, population, area, neighbors, currencies, languages, timezones, nativename, subregion, independant, topLevelDomain) {
         this.alpha3 = alpha3;
         this.name = name;
         this.capital = capital;
@@ -31,7 +31,7 @@ class Country {
         this.nativename = nativename;
         this.subregion = subregion;
         this.independant = independant;
-        this.topLevelDomains = topLevelDomains;
+        this.topLevelDomain = topLevelDomain;
     }
     
     /* 
@@ -101,7 +101,7 @@ class Country {
                 country.nativeName ? country.nativeName : "N/A",
                 country.subregion ? country.subregion : "N/A",
                 country.independent,
-                country.topLevelDomains ? country.topLevelDomains : []
+                country.topLevelDomain ? country.topLevelDomain : []
             )
             
             return c;

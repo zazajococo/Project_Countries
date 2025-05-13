@@ -106,10 +106,10 @@ Tableau des pays ayant le plusieurs Top Level Domains Internet.
 function moreTopLevelDomains() {
     const MultipleTopLevelDomains = [];
     for (const country of Country.all_countries) {
-        console.log("Pays= ", country.name, " TLD = ", country.topLevelDomains);
-        if (country.topLevelDomains.length > 1) {
+        console.log("Pays= ", country.name, " TLD = ", country.topLevelDomain);
+        if (country.topLevelDomain.length > 1) {
             MultipleTopLevelDomains.push(country);
-            console.log("Pays= ", country.name, " TLD = ", country.topLevelDomains);
+            console.log("Pays= ", country.name, " TLD = ", country.topLevelDomain);
         }
     }
     console.table(MultipleTopLevelDomains);
