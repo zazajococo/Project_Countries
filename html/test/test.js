@@ -92,7 +92,7 @@ function moreTopLevelDomains() {
     const MultipleTopLevelDomains = [];
     for (const country of Country.all_countries) {
         if (country.getNbTLD() > 1) {
-            MultipleTopLevelDomains.push(c);
+            MultipleTopLevelDomains.push(country);
             console.log("Pays= ", country.name, " TLD = ", country.topLevelDomains);
         }
     }
