@@ -12,9 +12,15 @@ const continentFilter = document.getElementById('continentFilter');
 const languageFilter = document.getElementById('languageFilter');
 const paysFilter = document.getElementById('paysFilter');
 
-// Variable pour stocker les résultats filtrés
+// Variable pour stocker les pays filtrés
 let paysFiltrés = [];
 
+/* 
+Function displayCountries(page)
+Permet d'afficher le tableau de pays avec une pagination
+1 page = 25 pays
+Ajout d'un paramètre data qui stocke les pays filtrés ou tous les pays
+*/
 function displayCountries(page, data = Country.all_countries) {
     tBody.innerHTML = "";
     const start = (page - 1) * itemsPerPage;
@@ -66,6 +72,10 @@ function displayCountries(page, data = Country.all_countries) {
     updatePaginationButtons(data);
 }
 
+/* 
+Function showDetails(country)
+Permet d'afficher le détails d'un pays lors d'un click sur la ligne coresspondante
+*/
 function showDetails(country) {
     detailsTableBody.innerHTML = "";
     document.getElementById('countryName').textContent = country.name;
@@ -113,6 +123,10 @@ function showDetails(country) {
     detailsContainer.style.display = 'block';
 }
 
+/* 
+Function showLargeFlag(flagSrc)
+Permet d'afficher le drapeau en grand sur la page
+*/
 function showLargeFlag(flagSrc) {
     largeFlag.src = flagSrc;
     flagContainer.style.display = 'block';
@@ -126,12 +140,20 @@ closeDetails.onclick = () => {
     detailsContainer.style.display = 'none';
 };
 
+/* 
+Function changePage(page)
+Permet de changer de page 
+*/
 function changePage(page) {
     currentPage = page;
     const data = paysFiltrés.length ? paysFiltrés : Country.all_countries;
     displayCountries(currentPage, data);
 }
 
+/* 
+Function updatePaginationButtons()
+Permet d'afficher ou non les boutons PREC/SUIV
+*/
 function updatePaginationButtons(data = Country.all_countries) {
     const totalPages = Math.ceil(data.length / itemsPerPage);
     paginationContainer.innerHTML = "";
@@ -154,6 +176,10 @@ function updatePaginationButtons(data = Country.all_countries) {
 // Initial display
 displayCountries(currentPage);
 
+/* 
+Function filter
+Permet de récupérer filtres que l'utilisateur souhaite
+*/
 function filter() {
     const continents = new Set(countries.map(country => country.region).filter(Boolean));
     [...continents].sort().forEach(continent => {
@@ -177,6 +203,10 @@ function filter() {
     paysFilter.addEventListener('input', applyFilters);
 }
 
+/* 
+Function applyFilters()
+Permet d'appliquer les filtres au tableau et d'appeler la fonction displayCountries(currentPage, paysFiltrés) pour afficher seulement les pays filtrés
+*/
 function applyFilters() {
     const selectedContinent = continentFilter.value;
     const selectedLanguage = languageFilter.value;
@@ -203,10 +233,19 @@ Ex : str1.localeCompare(str2, langues, accents);
 - accents : sensitivity (differente maniere de comparer (accent, espace etc...))
 Ex : str1.localeCompare(str2, 'fr', { sensitivity: 'base' });
 
-
 */
 
+/* 
+Variable pour définir l'ordre croissant/aphabétique au début
+1 clique = croissant/alphabétique
+double clique = décroissant/désalphabétique
+*/
 let ordreCroissant = true;
+
+/* 
+Function trierNom()
+Permet de trier (alphabétique, désalphabétique) les pays en fonction de leurs nom 
+*/
 function trierNom() {
     const data = paysFiltrés.length ? paysFiltrés : Country.all_countries;
     data.sort((a, b) => {
@@ -224,6 +263,10 @@ function trierNom() {
     displayCountries(currentPage, data);
 }
 
+/* 
+Function trierCapital()
+Permet de trier (alphabétique, désalphabétique) les pays en fonction de leurs capital
+*/
 function trierCapital() {
     const data = paysFiltrés.length ? paysFiltrés : Country.all_countries;
     data.sort((a, b) => {
@@ -251,6 +294,10 @@ function trierCapital() {
     displayCountries(currentPage, data);
 }
 
+/* 
+Function trierContinent()
+Permet de trier (alphabétique, désalphabétique) les pays en fonction de leurs continents
+*/
 function trierContinent() {
     const data = paysFiltrés.length ? paysFiltrés : Country.all_countries;
     data.sort((a, b) => {
@@ -278,6 +325,10 @@ function trierContinent() {
     displayCountries(currentPage, data);
 }
 
+/* 
+Function trierPopulation()
+Permet de trier (croissant décroissant) les pays en fonction de leurs population 
+*/
 function trierPopulation() {
     const data = paysFiltrés.length ? paysFiltrés : Country.all_countries;
     data.sort(function (a, b) {
@@ -307,6 +358,10 @@ function trierPopulation() {
     displayCountries(currentPage, data);
 }
 
+/* 
+Function trierSurface()
+Permet de trier (croissant décroissant) les pays en fonction de leurs surfaces
+*/
 function trierSurface() {
     const data = paysFiltrés.length ? paysFiltrés : Country.all_countries;
     data.sort(function (a, b) {
@@ -336,6 +391,10 @@ function trierSurface() {
     displayCountries(currentPage, data);
 }
 
+/* 
+Function trierDensite()
+Permet de trier (croissant décroissant) les pays en fonction de leurs densite 
+*/
 function trierDensite() {
     const data = paysFiltrés.length ? paysFiltrés : Country.all_countries;
     data.sort(function (a, b) {
@@ -365,6 +424,9 @@ function trierDensite() {
     displayCountries(currentPage, data);
 }
 
+/* 
+Si on clique sur le nom d'une colonne (th) on enlève ou ajoute la classe pour mettre le nom de la colonne en gras
+*/
 document.querySelectorAll("th").forEach(th => {
     th.addEventListener("click", (e) => {
         e.stopPropagation();

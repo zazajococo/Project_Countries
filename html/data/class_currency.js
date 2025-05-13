@@ -1,17 +1,3 @@
-// Vous allez d’abord traiter les monnaies.  
-// Q1  -  A  partir  de  votre  analyse de la structure JSON d’une monnaie, créez une classe 
-// Currency  pour  y  stocker  vos  données  de  travail.  Prévoyez  une  fonction  toString() 
-// synthétique qui retourne une chaîne (sans \n) contenant : 
-// ●  Le code 
-// ●  Le nom (anglais) 
-// ●  Le symbole 
-// Exemple à respecter : 
-// EUR, Euro, € 
-
-// Q2 - Écrivez une fonction fill_currencies() qui, à partir de la source de données, crée 
-// des objets Currency que vous stockez dans un tableau associatif (variable de classe) 
-// nommé all_currencies dont les clés sont les valeurs trouvées
-
 class Currency{
 
     static all_currencies = {};
@@ -47,13 +33,20 @@ class Currency{
         this.nom = nom;
     }
 
+    /* 
+    Méthode toString()
+    Permet de retourner les informations sur une monnaie
+     */
     toString() { 
         return `${this.GetCode}, ${this.GetNom}, ${this.GetSymbole}` 
     }
 
 }
 
- // Clé : valeur, ex : code : EUR
+/* 
+Function fill_currencies()
+Permet de lis la source json countries, créer des objets Currencies et les stockes dans le tableau associatif all_currencies
+*/
  function fill_currencies() {
     const all_currencies = {};
     countries.forEach(country => {

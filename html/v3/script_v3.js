@@ -9,6 +9,11 @@ const detailsContainer = document.getElementById('detailsContainer');
 const flagContainer = document.getElementById('flagContainer');
 const closeFlag = document.getElementById('closeFlag');
 
+/* 
+Function displayCountries(page)
+Permet d'afficher le tableau de pays avec une pagination 
+1 page = 25 pays
+*/
 function displayCountries(page) {
     tBody.innerHTML = ""; 
     const start = (page - 1) * itemsPerPage;
@@ -54,6 +59,10 @@ function displayCountries(page) {
     }); 
 }
 
+/* 
+Function showDetails(country)
+Permet d'afficher le détails d'un pays lors d'un click sur la ligne coresspondante
+*/
 function showDetails(country) {
     detailsTableBody.innerHTML = "";
     document.getElementById('countryName').textContent = country.name;
@@ -114,7 +123,11 @@ function showDetails(country) {
     console.log(detailsTableBody);
     detailsContainer.style.display = 'block';
 }
-    
+   
+/* 
+Function showLargeFlag(flagSrc)
+Permet d'afficher le drapeau en grand sur la page
+*/
 function showLargeFlag(flagSrc) {
     largeFlag.src = flagSrc; // Affiche le drapeau en grand
     flagContainer.style.display = 'block';
@@ -129,15 +142,22 @@ closeDetails.onclick = () => {
     detailsContainer.style.display = 'none'; // Masque la zone de détails
 };
 
+/* 
+Function changePage(page)
+Permet de changer de page 
+*/
 function changePage(page) {
     currentPage = page;
     displayCountries(currentPage);
     updatePaginationButtons();
 }
-
+// Appel de la fonction 
 displayCountries(currentPage);
 
-
+/* 
+Function updatePaginationButtons()
+Permet d'afficher ou non les boutons PREC/SUIV
+*/
 function updatePaginationButtons() {
     const totalPages = Math.ceil(Country.all_countries.length / itemsPerPage);
     console.log("tot = ", totalPages)
@@ -158,5 +178,5 @@ function updatePaginationButtons() {
         paginationContainer.appendChild(nextButton);
     }
 }
-
+// Appel de la fonction 
 updatePaginationButtons();

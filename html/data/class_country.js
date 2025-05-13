@@ -1,19 +1,4 @@
 class Country {
-    /* La classe Country 
-    Q1 - A partir de votre analyse de la structure JSON d’un pays, créez une classe Country 
-    pour y stocker vos données de travail. Prévoyez une fonction toString() synthétique 
-    qui retourne une chaîne (sans \n) contenant : 
-    ●  Le code Alpha 3 
-    ●  Le nom en français 
-    ●  La capitale 
-    ●  Le continent 
-    ●  La population 
-    ●  La liste des noms des pays voisins 
-    Exemple à respecter : 
-    AND, Andorre, Andorra la Vella, Europe, 77 265 hab, (Espagne, France) 
- 
-    Q2  -  Ecrivez  une  fonction fill_countries() qui lit la source de données (countries.js) et crée des pays*/
-
     alpha3;
     name;
     capital;
@@ -49,11 +34,18 @@ class Country {
         this.topLevelDomains = topLevelDomains;
     }
     
-
+    /* 
+    Méthode toString()
+    Permet de retourner les informations sur un pays
+     */
     toString() {
         return `${this.alpha3}, ${this.name}, ${this.capital}, ${this.continent}, ${this.population}, ` + this.getNeighbors(this.neighbors);
     }
 
+    /* 
+    Méthode getName(code)
+    Permet de retourner le nom d'un pays
+    */
     static getName(code) {
         for (let country of this.all_countries) {
             if (country.alpha3 == code) {
@@ -62,6 +54,10 @@ class Country {
         }
     }
 
+    /* 
+    Méthode getNeighbors(code)
+    Permet de retourner une liste des noms des voisins du pays
+    */
     getNeighbors(codes) {
         const names = [];
         for (let i = 0; i < codes.length; i++) {
@@ -75,31 +71,36 @@ class Country {
         return "(" +names.join(", ")+")";
     }
 
+    /* 
+    Méthode getNbNeighbors(code)
+    Permet de retourner le nombre de voisins du pays
+    */
     getNbNeighbors() {
         return this.neighbors.length;
     }
 
-    getNbTLD() {
-        return this.topLevelDomains.length;
-    }
-
+    
+    /* 
+    Function fill_countries()
+    Permet de lis la source json countries, créer des objets Countries et les stockes dans le tableau associatif all_countries
+    */
     static fill_countries() {
         this.all_countries = countries.map(
             country =>  {
                 const c = new Country
             (
-                country.alpha3Code ? country.alpha3Code : "No Alpha3Code", 
-                country.translations.fr ? country.translations.fr : "No translations found", 
-                country.capital ? country.capital : "No Capital found", 
-                country.region ? country.region : "No region", 
-                country.population ? country.population : "No population", 
-                country.area ? country.area : "No area",
+                country.alpha3Code ? country.alpha3Code : "N/A", 
+                country.translations.fr ? country.translations.fr : "N/A", 
+                country.capital ? country.capital : "N/A", 
+                country.region ? country.region : "N/A", 
+                country.population ? country.population : "N/A", 
+                country.area ? country.area : "N/A",
                 country.borders ? country.borders : [],
                 country.currencies ? country.currencies : [],
                 country.languages ? country.languages : [],
                 country.timezones ? country.timezones : [],
-                country.nativeName ? country.nativeName : "No native name",
-                country.subregion ? country.subregion : "No subregion",
+                country.nativeName ? country.nativeName : "N/A",
+                country.subregion ? country.subregion : "N/A",
                 country.independent,
                 country.topLevelDomains ? country.topLevelDomains : []
             )
@@ -109,22 +110,28 @@ class Country {
         )
     } 
 
-    //omplétez votre classe Country avec les méthodes suivantes : 
-    //  ●  getPopDensity() : retourne la densité de population du pays (hab. / Km2) 
-
+    /* 
+    Méthode getArea()
+    Permet de retourner la surface d'un pays
+    */
     getArea() {
         return this.area;
     }
 
-
+    /* 
+    Méthode getPopDensity()
+    Permet de retourner la densité de population du pays (hab. / Km2) 
+    */
     getPopDensity() {
         const area = this.getArea();
         const pop = this.population;
         return pop / area;
     }
 
-    //  ●  getBorders() : retourne un tableau JS des pays frontaliers (les objets Country, pas les codes). 
-
+    /* 
+    Méthode getBorders()
+    Permet de retourner un tableau JS des pays frontaliers (les objets Country, pas les codes). 
+    */
     getBorders() {
         const b = [];
         if (!Array.isArray(this.borders)) {
@@ -140,8 +147,10 @@ class Country {
         return b;
     }
 
-    //  ●  getCurrencies() : retourne un tableau des monnaies (objet Currencies)
-
+    /* 
+    Méthode getBorders()
+    Permet de retourner un tableau des monnaies (objet Currencies)
+    */
     getCurrencies(){
         const currencies = Currency.all_currencies;
         const cu = [];
@@ -155,9 +164,11 @@ class Country {
         return null;
     }
 
-    // getLanguage() : retourne un tableau des langues (objet Languages
-
-    getLanguage() {
+    /* 
+    Méthode getBorders()
+    Permet de retourner un tableau des langues (objet Languages
+    */
+    getLanguages() {
         const languages = Language.all_languages;
         const lang = [];
         for (l of this.languages) {
