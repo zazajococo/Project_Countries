@@ -79,6 +79,10 @@ class Country {
         return this.neighbors.length;
     }
 
+    getNbTLD() {
+        return this.topLevelDomains.length;
+    }
+
     static fill_countries() {
         this.all_countries = countries.map(
             country =>  {
