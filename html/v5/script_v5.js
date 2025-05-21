@@ -10,22 +10,22 @@ const flagContainer = document.getElementById('flagContainer');
 const closeFlag = document.getElementById('closeFlag');
 const continentFilter = document.getElementById('continentFilter');
 const languageFilter = document.getElementById('languageFilter');
-const paysFilter = document.getElementById('paysFilter');
+const countriesFilter = document.getElementById('countriesFilter');
 
 // Variable pour stocker les pays filtrés
-let paysFiltrés = [];
+let tabCountryFilter = [];
 
 /* 
 Function displayCountries(page)
 Permet d'afficher le tableau de pays avec une pagination
 1 page = 25 pays
-Ajout d'un paramètre data qui stocke les pays filtrés ou tous les pays
+Ajout d'un paramètre dataCountry qui stocke les pays filtrés ou tous les pays
 */
-function displayCountries(page, data = Country.all_countries) {
+function displayCountries(page, dataCountry = Country.all_countries) {
     tBody.innerHTML = "";
     const start = (page - 1) * itemsPerPage;
     const end = start + itemsPerPage;
-    const countriesToDisplay = data.slice(start, end);
+    const countriesToDisplay = dataCountry.slice(start, end);
 
     countriesToDisplay.forEach(country => {
         const row = document.createElement('tr');
@@ -68,8 +68,8 @@ function displayCountries(page, data = Country.all_countries) {
         row.appendChild(flag);
         tBody.appendChild(row);
     });
-
-    updatePaginationButtons(data);
+    // Appel de la fonction
+    updatePaginationButtons(dataCountry);
 }
 
 /* 
@@ -146,16 +146,16 @@ Permet de changer de page
 */
 function changePage(page) {
     currentPage = page;
-    const data = paysFiltrés.length ? paysFiltrés : Country.all_countries;
-    displayCountries(currentPage, data);
+    const dataCountry = tabCountryFilter.length ? tabCountryFilter : Country.all_countries;
+    displayCountries(currentPage, dataCountry);
 }
 
 /* 
 Function updatePaginationButtons()
 Permet d'afficher ou non les boutons PREC/SUIV
 */
-function updatePaginationButtons(data = Country.all_countries) {
-    const totalPages = Math.ceil(data.length / itemsPerPage);
+function updatePaginationButtons(dataCountry = Country.all_countries) {
+    const totalPages = Math.ceil(dataCountry.length / itemsPerPage);
     paginationContainer.innerHTML = "";
 
     if (currentPage > 1) {
@@ -173,7 +173,7 @@ function updatePaginationButtons(data = Country.all_countries) {
     }
 }
 
-// Initial display
+// Appel de la fonction
 displayCountries(currentPage);
 
 /* 
@@ -200,29 +200,29 @@ function filter() {
 
     continentFilter.addEventListener('change', applyFilters);
     languageFilter.addEventListener('change', applyFilters);
-    paysFilter.addEventListener('input', applyFilters);
+    countriesFilter.addEventListener('input', applyFilters);
 }
 
 /* 
 Function applyFilters()
-Permet d'appliquer les filtres au tableau et d'appeler la fonction displayCountries(currentPage, paysFiltrés) pour afficher seulement les pays filtrés
+Permet d'appliquer les filtres au tableau et d'appeler la fonction displayCountries(currentPage, tabCountryFilter) pour afficher seulement les pays filtrés
 */
 function applyFilters() {
     const selectedContinent = continentFilter.value;
     const selectedLanguage = languageFilter.value;
-    const selectedPays = paysFilter.value.trim().toLowerCase();
+    const selectedCountries = countriesFilter.value.trim().toLowerCase();
 
-    paysFiltrés = countries.filter(pays => {
-        const matchContinent = !selectedContinent || pays.region === selectedContinent;
-        const matchLanguage = !selectedLanguage || pays.languages.some(lang => lang.name === selectedLanguage);
-        const matchPays = !selectedPays || pays.translations.fr.toLowerCase().includes(selectedPays) || pays.name.toLowerCase().includes(selectedPays) ;
-        return matchContinent && matchLanguage && matchPays;
+    tabCountryFilter = countries.filter(countrie => {
+        const matchContinent = !selectedContinent || countrie.region === selectedContinent;
+        const matchLanguage = !selectedLanguage || countrie.languages.some(lang => lang.name === selectedLanguage);
+        const matchCountries = !selectedCountries || countrie.translations.fr.toLowerCase().includes(selectedCountries) || countrie.name.toLowerCase().includes(selectedCountries) ;
+        return matchContinent && matchLanguage && matchCountries;
     });
 
     currentPage = 1;
-    displayCountries(currentPage, paysFiltrés);
+    displayCountries(currentPage, tabCountryFilter);
 }
-
+// Appel de la fonction
 filter();
 
 /* 
@@ -240,18 +240,18 @@ Variable pour définir l'ordre croissant/aphabétique au début
 1 clique = croissant/alphabétique
 double clique = décroissant/désalphabétique
 */
-let ordreCroissant = true;
+let ascendingOrder = true;
 
 /* 
-Function trierNom()
+Function sortName()
 Permet de trier (alphabétique, désalphabétique) les pays en fonction de leurs nom 
 */
-function trierNom() {
-    const data = paysFiltrés.length ? paysFiltrés : Country.all_countries;
-    data.sort((a, b) => {
+function sortName() {
+    const dataCountry = tabCountryFilter.length ? tabCountryFilter : Country.all_countries;
+    dataCountry.sort((a, b) => {
         const nomA = a.name.toLowerCase(); // minuscule pour que se soit égale
         const nomB = b.name.toLowerCase(); // minuscule pour que se soit égale
-        if (ordreCroissant) {
+        if (orderAscendant) {
             return nomA.localeCompare(nomB, 'fr', { sensitivity: 'base' })
         } else {
             return nomB.localeCompare(nomA, 'fr', { sensitivity: 'base' })
@@ -259,29 +259,29 @@ function trierNom() {
         
     });
 
-    ordreCroissant = !ordreCroissant;
-    displayCountries(currentPage, data);
+    orderAscendant = !orderAscendant;
+    displayCountries(currentPage, dataCountry);
 }
 
 /* 
-Function trierCapital()
+Function sortCapital()
 Permet de trier (alphabétique, désalphabétique) les pays en fonction de leurs capital
 */
-function trierCapital() {
-    const data = paysFiltrés.length ? paysFiltrés : Country.all_countries;
-    data.sort((a, b) => {
+function sortCapital() {
+    const dataCountry = tabCountryFilter.length ? tabCountryFilter : Country.all_countries;
+    dataCountry.sort((a, b) => {
         const capitalA = a.capital.toLowerCase(); // minuscule pour que se soit égale
         const capitalB = b.capital.toLowerCase(); // minuscule pour que se soit égale
         const nomA = a.name.toLowerCase(); // minuscule pour que se soit égale
         const nomB = b.name.toLowerCase(); // minuscule pour que se soit égale
         if (capitalA === capitalB) {
-            if (ordreCroissant) {
+            if (orderAscendant) {
                 return nomA.localeCompare(nomB, 'fr', { sensitivity: 'base' })
             } else {
                 return nomB.localeCompare(nomA, 'fr', { sensitivity: 'base' })
             }
         } else {
-            if (ordreCroissant) {
+            if (orderAscendant) {
                 return capitalA.localeCompare(capitalB, 'fr', { sensitivity: 'base' })
             } else {
                 return capitalB.localeCompare(capitalA, 'fr', { sensitivity: 'base' })
@@ -290,30 +290,30 @@ function trierCapital() {
         
     });
 
-    ordreCroissant = !ordreCroissant;
-    displayCountries(currentPage, data);
+    orderAscendant = !orderAscendant;
+    displayCountries(currentPage, dataCountry);
 }
 
 /* 
-Function trierContinent()
+Function sortContinent()
 Permet de trier (alphabétique, désalphabétique) les pays en fonction de leurs continents
 */
-function trierContinent() {
-    const data = paysFiltrés.length ? paysFiltrés : Country.all_countries;
-    data.sort((a, b) => {
+function sortContinent() {
+    const dataCountry = tabCountryFilter.length ? tabCountryFilter : Country.all_countries;
+    dataCountry.sort((a, b) => {
         const continentA = a.continent.toLowerCase(); // minuscule pour que se soit égale
         const continentB = b.continent.toLowerCase(); // minuscule pour que se soit égale
         const nomA = a.name.toLowerCase(); // minuscule pour que se soit égale
         const nomB = b.name.toLowerCase(); // minuscule pour que se soit égale
 
         if (continentA === continentB) {
-            if (ordreCroissant) {
+            if (orderAscendant) {
                 return nomA.localeCompare(nomB, 'fr', { sensitivity: 'base' })
             } else {
                 return nomB.localeCompare(nomA, 'fr', { sensitivity: 'base' })
             }
         } else {
-            if (ordreCroissant) {
+            if (orderAscendant) {
                 return continentA.localeCompare(continentB, 'fr', { sensitivity: 'base' })
             } else {
                 return continentB.localeCompare(continentA, 'fr', { sensitivity: 'base' })
@@ -321,29 +321,29 @@ function trierContinent() {
         }
     });
 
-    ordreCroissant = !ordreCroissant;
-    displayCountries(currentPage, data);
+    orderAscendant = !orderAscendant;
+    displayCountries(currentPage, dataCountry);
 }
 
 /* 
-Function trierPopulation()
+Function sortPopulation()
 Permet de trier (croissant décroissant) les pays en fonction de leurs population 
 */
-function trierPopulation() {
-    const data = paysFiltrés.length ? paysFiltrés : Country.all_countries;
-    data.sort(function (a, b) {
+function sortPopulation() {
+    const dataCountry = tabCountryFilter.length ? tabCountryFilter : Country.all_countries;
+    dataCountry.sort(function (a, b) {
         const populationA = a.population;
         const populationB = b.population;
         const nomA = a.name.toLowerCase(); // minuscule pour que se soit égale
         const nomB = b.name.toLowerCase(); // minuscule pour que se soit égale
         if (populationA === populationB) {
-            if (ordreCroissant) {
+            if (orderAscendant) {
                 return nomA.localeCompare(nomB, 'fr', { sensitivity: 'base' })
             } else {
                 return nomB.localeCompare(nomA, 'fr', { sensitivity: 'base' })
             }
         } else {
-            if(ordreCroissant){
+            if(orderAscendant){
                 return populationA - populationB;
             }else{
                 return populationB - populationA;
@@ -354,29 +354,29 @@ function trierPopulation() {
       });
 
 
-    ordreCroissant = !ordreCroissant;
-    displayCountries(currentPage, data);
+    orderAscendant = !orderAscendant;
+    displayCountries(currentPage, dataCountry);
 }
 
 /* 
-Function trierSurface()
+Function sortArea()
 Permet de trier (croissant décroissant) les pays en fonction de leurs surfaces
 */
-function trierSurface() {
-    const data = paysFiltrés.length ? paysFiltrés : Country.all_countries;
-    data.sort(function (a, b) {
+function sortArea() {
+    const dataCountry = tabCountryFilter.length ? tabCountryFilter : Country.all_countries;
+    dataCountry.sort(function (a, b) {
         const surfaceA = a.area;
         const surfaceB = b.area;
         const nomA = a.name.toLowerCase(); // minuscule pour que se soit égale
         const nomB = b.name.toLowerCase(); // minuscule pour que se soit égale
         if (surfaceA === surfaceB) {
-            if (ordreCroissant) {
+            if (orderAscendant) {
                 return nomA.localeCompare(nomB, 'fr', { sensitivity: 'base' })
             } else {
                 return nomB.localeCompare(nomA, 'fr', { sensitivity: 'base' })
             }
         } else {
-            if(ordreCroissant){
+            if(orderAscendant){
                 return surfaceA - surfaceB;
             }else{
                 return surfaceB - surfaceA;
@@ -387,29 +387,29 @@ function trierSurface() {
       });
 
 
-    ordreCroissant = !ordreCroissant;
-    displayCountries(currentPage, data);
+    orderAscendant = !orderAscendant;
+    displayCountries(currentPage, dataCountry);
 }
 
 /* 
-Function trierDensite()
+Function sortDensity()
 Permet de trier (croissant décroissant) les pays en fonction de leurs densite 
 */
-function trierDensite() {
-    const data = paysFiltrés.length ? paysFiltrés : Country.all_countries;
-    data.sort(function (a, b) {
+function sortDensity() {
+    const dataCountry = tabCountryFilter.length ? tabCountryFilter : Country.all_countries;
+    dataCountry.sort(function (a, b) {
         const densiteA = a.getPopDensity?.();
         const densiteB = b.getPopDensity?.();
         const nomA = a.name.toLowerCase(); // minuscule pour que se soit égale
         const nomB = b.name.toLowerCase(); // minuscule pour que se soit égale
         if (densiteA === densiteB) {
-            if (ordreCroissant) {
+            if (orderAscendant) {
                 return nomA.localeCompare(nomB, 'fr', { sensitivity: 'base' })
             } else {
                 return nomB.localeCompare(nomA, 'fr', { sensitivity: 'base' })
             }
         } else {
-            if(ordreCroissant){
+            if(orderAscendant){
                 return densiteA - densiteB;
             }else{
                 return densiteB - densiteA;
@@ -420,8 +420,8 @@ function trierDensite() {
       });
 
 
-    ordreCroissant = !ordreCroissant;
-    displayCountries(currentPage, data);
+    orderAscendant = !orderAscendant;
+    displayCountries(currentPage, dataCountry);
 }
 
 /* 

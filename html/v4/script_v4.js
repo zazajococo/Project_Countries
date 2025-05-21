@@ -10,7 +10,7 @@ const flagContainer = document.getElementById('flagContainer');
 const closeFlag = document.getElementById('closeFlag');
 const continentFilter = document.getElementById('continentFilter');
 const languageFilter = document.getElementById('languageFilter');
-const paysFilter = document.getElementById('paysFilter');
+const countiresFilter = document.getElementById('countriesFilter');
 
 // Variable pour stocker les pays filtrés
 let tabCountryFilters = [];
@@ -203,7 +203,7 @@ function filter() {
 
     continentFilter.addEventListener('change', applyFilters);
     languageFilter.addEventListener('change', applyFilters);
-    paysFilter.addEventListener('input', applyFilters);
+    countriesFilter.addEventListener('input', applyFilters);
 }
 
 /* 
@@ -213,20 +213,17 @@ Permet d'appliquer les filtres au tableau et d'appeler la fonction displayCountr
 function applyFilters() {
     const selectedContinent = continentFilter.value;
     const selectedLanguage = languageFilter.value;
-    const selectedPays = paysFilter.value.trim().toLowerCase();
+    const selectedCountries = countriesFilter.value.trim().toLowerCase();
 
-    tabCountryFilters
- = countries.filter(pays => {
-        const matchContinent = !selectedContinent || pays.region === selectedContinent;
-        const matchLanguage = !selectedLanguage || pays.languages.some(lang => lang.name === selectedLanguage);
-        const matchPays = !selectedPays || pays.translations.fr.toLowerCase().includes(selectedPays) || pays.name.toLowerCase().includes(selectedPays) ;
-        return matchContinent && matchLanguage && matchPays;
+    tabCountryFilters = countries.filter(countrie => {
+        const matchContinent = !selectedContinent || countrie.region === selectedContinent;
+        const matchLanguage = !selectedLanguage || countrie.languages.some(lang => lang.name === selectedLanguage);
+        const matchCountries = !selectedCountries || countrie.translations.fr.toLowerCase().includes(selectedCountries) || countrie.name.toLowerCase().includes(selectedCountries) ;
+        return matchContinent && matchLanguage && matchCountries;
     });
 
     currentPage = 1;
-    displayCountries(currentPage, tabCountryFilters
-    
-    );
+    displayCountries(currentPage, tabCountryFilters);
 }
 // Appel de la fonction
 filter();
