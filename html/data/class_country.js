@@ -70,7 +70,7 @@ class Country {
     }
 
     /* 
-    Méthode getNbNeighbors(code)
+    Méthode getNbNeighbors()
     Permet de retourner le nombre de voisins du pays
     */
     getNbNeighbors() {
@@ -144,7 +144,7 @@ class Country {
     }
 
     /* 
-    Méthode getBorders()
+    Méthode getCurrencies()
     Permet de retourner un tableau des monnaies (objet Currencies)
     */
     getCurrencies(){
@@ -157,11 +157,11 @@ class Country {
                 }
             }
         }
-        return null;
+        return cu;
     }
 
     /* 
-    Méthode getBorders()
+    Méthode getLanguages()
     Permet de retourner un tableau des langues (objet Languages
     */
     getLanguages() {
@@ -174,7 +174,7 @@ class Country {
                 }
             }
         }
-        return null;
+        return l;
     }
 }
 
