@@ -83,22 +83,8 @@ function moreLanguages() {
 }
 // Appel de la fonction
 moreLanguages();    
-    // utilisation de all_countries de la classe Country
-    const allCountries = Country.all_countries;
-    let maxLanguages= 0;
-    for (const country of allCountries) {
-        const languages = country.languages;
-        if (country.getNbLanguages() >= maxLanguages) {
-            maxLanguages = languages.length;
-            console.log("Pays = ", country.name," NB = ", country.getNbLanguages());    
-            console.log("Langues = ", country.getLanguages(country.languages));
-        }
-        
-    }
-    
-    const countriesWithMaxLanguages = allCountries.filter(country => country.getNbLanguages() === maxLanguages);
-    console.table(countriesWithMaxNeighbors);
-}
+
+
 
 /* 
 Test Q5
@@ -106,28 +92,6 @@ Fonction withCommonLanguage()
 Tableau des pays ayant au moins un voisin parlant l’une de  ses  langues.  Affichez  aussi  les  pays  voisins  (objets  Country)  et  les  langues  en question (objets Language). 
 */
 function withCommonLanguage() {
-    const allCountries = Country.all_countries;
-    const result=[]
-    for(const country of allCountries){
-        let hasCommonLanguage = false;
-        for(const border of country.getNeighbors(country)){
-            if(border !=null){
-                for(const language of country.languages){
-                    if(country.languages.includes(language)){
-                        hasCommonLanguage = true;
-                        break;
-                    }
-                }
-            }
-            if(hasCommonLanguage){
-                break;
-            }
-        }
-        if(!hasCommonLanguage){
-            result.push(country)
-        }
-    }
-    console.table(result)
     const allCountries = Country.all_countries;
     const result = [];
     for (const country of allCountries) {
@@ -156,28 +120,6 @@ Fonction withoutCommonCurrency()
 Tableau  des  pays  sans  aucun  voisin ayant au moins une de ses monnaies. 
 */
 function withoutCommonCurrency() {
-    const allCountries = Country.all_countries;
-    const result=[]
-    for(const country of allCountries){
-        let hasCommonCurrency = false;
-        for(const border of country.getNeighbors(country)){
-            if(border !=null){
-                for(const currency of country.currencies){
-                    if(country.currencies.includes(currency)){
-                        hasCommonCurrency = true;
-                        break;
-                    }
-                }
-            }
-            if(hasCommonCurrency){
-                break;
-            }
-        }
-        if(!hasCommonCurrency){
-            result.push(country)
-        }
-    }
-    console.table(result)
 
     const allCountries = Country.all_countries;
     const result = [];
