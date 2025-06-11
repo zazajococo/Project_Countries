@@ -215,11 +215,11 @@ function applyFilters() {
     const selectedLanguage = languageFilter.value;
     const selectedCountries = countriesFilter.value.trim().toLowerCase();
 
-    tabCountryFilters = countries.filter(countrie => {
-        const matchContinent = !selectedContinent || countrie.region === selectedContinent;
-        const matchLanguage = !selectedLanguage || countrie.languages.some(lang => lang.name === selectedLanguage);
-        const matchCountries = !selectedCountries || countrie.translations.fr.toLowerCase().includes(selectedCountries) || countrie.name.toLowerCase().includes(selectedCountries) ;
-        return matchContinent && matchLanguage && matchCountries;
+    tabCountryFilters = countries.filter(pays => {
+        const matchContinent = !selectedContinent || pays.region === selectedContinent;
+        const matchLanguage = !selectedLanguage || pays.languages.some(lang => lang.name === selectedLanguage);
+        const matchPays = !selectedPays || pays.translations.fr.toLowerCase().includes(selectedPays) || pays.name.toLowerCase().includes(selectedPays) ;
+        return matchContinent && matchLanguage && matchPays;
     });
 
     currentPage = 1;

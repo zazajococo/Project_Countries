@@ -83,6 +83,22 @@ function moreLanguages() {
 }
 // Appel de la fonction
 moreLanguages();    
+    // utilisation de all_countries de la classe Country
+    const allCountries = Country.all_countries;
+    let maxLanguages= 0;
+    for (const country of allCountries) {
+        const languages = country.languages;
+        if (country.getNbLanguages() >= maxLanguages) {
+            maxLanguages = languages.length;
+            console.log("Pays = ", country.name," NB = ", country.getNbLanguages());    
+            console.log("Langues = ", country.getLanguages(country.languages));
+        }
+        
+    }
+    
+    const countriesWithMaxLanguages = allCountries.filter(country => country.getNbLanguages() === maxLanguages);
+    console.table(countriesWithMaxNeighbors);
+}
 
 /* 
 Test Q5
@@ -112,6 +128,26 @@ function withCommonLanguage() {
         }
     }
     console.table(result)
+    const allCountries = Country.all_countries;
+    const result = [];
+    for (const country of allCountries) {
+        let hasCommonLanguage = false;
+        for (const neighbor of country.neighbors) {
+            if (neighbor != null) {
+                for (const language of country.languages) {
+                    if (neighbor.languages.includes(language)) {
+                        hasCommonLanguage = true;
+                        break;
+                    }
+                }
+            }
+            if (!hasCommonLanguage) break;
+        }
+        if (hasCommonLanguage) {
+            result.push(country);
+        }
+    }
+    console.table(result);
 }
 
 /* 
@@ -143,6 +179,26 @@ function withoutCommonCurrency() {
     }
     console.table(result)
 
+    const allCountries = Country.all_countries;
+    const result = [];
+    for (const country of allCountries) {
+        let hasCommonCurrency = false;
+        for (const neighbor of country.neighbors) {
+            if (neighbor != null) {
+                for (const currency of country.currencies) {
+                    if (neighbor.currencies.includes(currency)) {
+                        hasCommonCurrency = true;
+                        break;
+                    }
+                }
+            }
+            if (hasCommonCurrency) break;
+        }
+        if (!hasCommonCurrency) {
+            result.push(country);
+        }
+    }
+    console.table(result);
 }
 
 /* 
@@ -164,6 +220,12 @@ function sortingDecreasingDensity() {
         }
     });
     console.table(countriesSort);
+    const allCountries = Country.all_countries;
+    const result = allCountries.slice().sort((a, b) => {
+        return b.getPopDensity() - a.getPopDensity();
+    });
+
+    console.table(sortedCountries);
 }
 // Appel de la fonction
 sortingDecreasingDensity();
@@ -175,14 +237,11 @@ Tableau des pays ayant le plusieurs Top Level Domains Internet.
 */
 function moreTopLevelDomains() {
     const MultipleTopLevelDomains = [];
-    for (const country of countries) {
+    for (const country of Country.all_countries) {
+        console.log("Pays= ", country.name, " TLD = ", country.topLevelDomain);
         if (country.topLevelDomain.length > 1) {
-            for (c of Country.all_countries) {
-                if (c.alpha3 === country.alpha3Code) {
-                    MultipleTopLevelDomains.push(c);
-                    console.log("Pays= ", c.name, " TLD = ", country.topLevelDomain);
-                }
-            }
+            MultipleTopLevelDomains.push(country);
+            console.log("Pays= ", country.name, " TLD = ", country.topLevelDomain);
         }
     }
     console.table(MultipleTopLevelDomains);

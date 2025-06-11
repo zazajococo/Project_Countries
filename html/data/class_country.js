@@ -6,17 +6,18 @@ class Country {
     population;
     area;
     neighbors;
-    TopLevelDomains;
     nativename;
     currencies;
     languages;
     timezones;
     subregion;
     independant;
+    topLevelDomain;
+
 
     static all_countries = [];
 
-    constructor (alpha3, name, capital, continent, population, area, neighbors, currencies, languages, timezones, nativename, subregion, independant) {
+    constructor (alpha3, name, capital, continent, population, area, neighbors, currencies, languages, timezones, nativename, subregion, independant, topLevelDomain) {
         this.alpha3 = alpha3;
         this.name = name;
         this.capital = capital;
@@ -30,6 +31,7 @@ class Country {
         this.nativename = nativename;
         this.subregion = subregion;
         this.independant = independant;
+        this.topLevelDomain = topLevelDomain;
     }
     
     /* 
@@ -99,6 +101,7 @@ class Country {
                 country.nativeName ? country.nativeName : "N/A",
                 country.subregion ? country.subregion : "N/A",
                 country.independent,
+                country.topLevelDomain ? country.topLevelDomain : []
             )
             
             return c;
@@ -152,11 +155,12 @@ class Country {
         const cu = [];
         for (c of this.currencies) {
             for (let i = 0; i < currencies.length; i++) {
-                if (c === currencies[i].code) {
-                    cu.push(currencies[i]);
+                if (c.code === currencies[i].code) {
+                    cu.push(c);
                 }
             }
         }
+        return cu;
         return cu;
     }
 
@@ -170,12 +174,22 @@ class Country {
         for (l of this.languages) {
             for (let j = 0; j < languages.length; j++) {
                 if (l.name === languages[j].name) {
-                    lang.push(languages[j]);
+                    lang.push(l);
                 }
             }
         }
-        return l;
+        return lang;
     }
+
+    /*
+    Méthode getNbLanguages()
+    Permet de retourner le nombre de langues parlées dans le pays
+    */
+   getNbLanguages() {
+        return this.languages.length;
+    }
+
+
 }
 
 Country.fill_countries()
