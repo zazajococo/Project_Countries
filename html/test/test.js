@@ -73,8 +73,6 @@ function moreLanguages() {
         const languages = country.languages;
         if (country.languages.length >= maxLanguage) {
             maxLanguage = languages.length;
-            console.log("Pays = ", country.name," NB = ", country.languages.length);    
-            console.log("Languages = ", country.languages);
         }
         
     }
@@ -110,21 +108,14 @@ function withCommonLanguage() {
     const result=[]
     for(const country of allCountries){
         let hasCommonLanguage = false;
-        for(const border of country.getNeighbors(country)){
-            if(border !=null){
-                for(const language of country.languages){
-                    if(country.languages.includes(language)){
-                        hasCommonLanguage = true;
-                        break;
-                    }
-                }
-            }
-            if(hasCommonLanguage){
-                break;
-            }
-        }
-        if(!hasCommonLanguage){
-            result.push(country)
+        for(const border of country.getBorders()){
+            console.table("border",border)
+            // for(const langC of country.getLanguages()) {
+            //     console.log("LangC", langC)
+            //     for (const langB of border.getLanguages()){
+            //         console.log("LangB", langB)
+            //     }
+            // }
         }
     }
     console.table(result)
@@ -160,7 +151,8 @@ function withoutCommonCurrency() {
     const result=[]
     for(const country of allCountries){
         let hasCommonCurrency = false;
-        for(const border of country.getNeighbors(country)){
+        for(const border of country.getBorders()){
+            console.log("borders", border);
             if(border !=null){
                 for(const currency of country.currencies){
                     if(country.currencies.includes(currency)){
