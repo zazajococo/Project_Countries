@@ -160,7 +160,7 @@ class Country {
                 }
             }
         }
-        return null;
+        return cu;
     }
 
     /* 
@@ -177,8 +177,18 @@ class Country {
                 }
             }
         }
-        return null;
+        return lang;
     }
+
+    /*
+    Méthode getNbLanguages()
+    Permet de retourner le nombre de langues parlées dans le pays
+    */
+   getNbLanguages() {
+        return this.languages.length;
+    }
+
+
 }
 
 Country.fill_countries()

@@ -215,8 +215,7 @@ function applyFilters() {
     const selectedLanguage = languageFilter.value;
     const selectedPays = paysFilter.value.trim().toLowerCase();
 
-    tabCountryFilters
- = countries.filter(pays => {
+    tabCountryFilters = countries.filter(pays => {
         const matchContinent = !selectedContinent || pays.region === selectedContinent;
         const matchLanguage = !selectedLanguage || pays.languages.some(lang => lang.name === selectedLanguage);
         const matchPays = !selectedPays || pays.translations.fr.toLowerCase().includes(selectedPays) || pays.name.toLowerCase().includes(selectedPays) ;

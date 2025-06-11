@@ -22,7 +22,7 @@ function displayCountries(page) {
         const continent = document.createElement('td');
         const flag = document.createElement('td');
 
-        // put the data in the cells
+        // insertions des données
         name.textContent = country.name || 'N/A';
         capital.textContent = country.capital || 'N/A';
         population.textContent = country.population || 'N/A';

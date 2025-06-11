@@ -66,7 +66,21 @@ Fonction moreLanguages()
 Tableau des pays parlant le plus de langues. Affichez aussi les langues (objets Language). 
 */
 function moreLanguages() {
-    console.log("Comming soon !");
+    // utilisation de all_countries de la classe Country
+    const allCountries = Country.all_countries;
+    let maxLanguages= 0;
+    for (const country of allCountries) {
+        const languages = country.languages;
+        if (country.getNbLanguages() >= maxLanguages) {
+            maxLanguages = languages.length;
+            console.log("Pays = ", country.name," NB = ", country.getNbLanguages());    
+            console.log("Langues = ", country.getLanguages(country.languages));
+        }
+        
+    }
+    
+    const countriesWithMaxLanguages = allCountries.filter(country => country.getNbLanguages() === maxLanguages);
+    console.table(countriesWithMaxNeighbors);
 }
 
 /* 
@@ -75,7 +89,26 @@ Fonction withCommonLanguage()
 Tableau des pays ayant au moins un voisin parlant l’une de  ses  langues.  Affichez  aussi  les  pays  voisins  (objets  Country)  et  les  langues  en question (objets Language). 
 */
 function withCommonLanguage() {
-    console.log("Comming soon !");
+    const allCountries = Country.all_countries;
+    const result = [];
+    for (const country of allCountries) {
+        let hasCommonLanguage = false;
+        for (const neighbor of country.neighbors) {
+            if (neighbor != null) {
+                for (const language of country.languages) {
+                    if (neighbor.languages.includes(language)) {
+                        hasCommonLanguage = true;
+                        break;
+                    }
+                }
+            }
+            if (!hasCommonLanguage) break;
+        }
+        if (hasCommonLanguage) {
+            result.push(country);
+        }
+    }
+    console.table(result);
 }
 
 /* 
@@ -84,7 +117,26 @@ Fonction withoutCommonCurrency()
 Tableau  des  pays  sans  aucun  voisin ayant au moins une de ses monnaies. 
 */
 function withoutCommonCurrency() {
-    console.log("Comming soon !");
+    const allCountries = Country.all_countries;
+    const result = [];
+    for (const country of allCountries) {
+        let hasCommonCurrency = false;
+        for (const neighbor of country.neighbors) {
+            if (neighbor != null) {
+                for (const currency of country.currencies) {
+                    if (neighbor.currencies.includes(currency)) {
+                        hasCommonCurrency = true;
+                        break;
+                    }
+                }
+            }
+            if (hasCommonCurrency) break;
+        }
+        if (!hasCommonCurrency) {
+            result.push(country);
+        }
+    }
+    console.table(result);
 }
 
  /* 
@@ -93,7 +145,12 @@ Fonction sortingDecreasingDensity()
 Tableau  des  pays  triés  par  ordre  décroissant  de densité de population.
 */
 function sortingDecreasingDensity() {
-    console.log("Comming soon !");
+    const allCountries = Country.all_countries;
+    const result = allCountries.slice().sort((a, b) => {
+        return b.getPopDensity() - a.getPopDensity();
+    });
+
+    console.table(sortedCountries);
 }
 // Appel de la fonction
 //neighborless();

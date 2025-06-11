@@ -129,7 +129,7 @@ Function showLargeFlag(flagSrc)
 Permet d'afficher le drapeau en grand sur la page
 */
 function showLargeFlag(flagSrc) {
-    largeFlag.src = flagSrc; // Affiche le drapeau en grand
+    largeFlag.src = flagSrc;
     flagContainer.style.display = 'block';
 
 }
@@ -137,11 +137,11 @@ function showLargeFlag(flagSrc) {
 closeFlag.onclick = () => {
     flagContainer.style.display = 'none';
 }
-    
-closeDetails.onclick = () => {
-    detailsContainer.style.display = 'none'; // Masque la zone de détails
-};
 
+// Masque la zone de détails
+closeDetails.onclick = () => {
+    detailsContainer.style.display = 'none'; 
+}
 /* 
 Function changePage(page)
 Permet de changer de page 
