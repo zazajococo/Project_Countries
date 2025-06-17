@@ -133,19 +133,20 @@ class Country {
     */
     getBorders() {
         const b = [];
-        if (!Array.isArray(this.borders)) {
-            this.b = [];
+        if (!Array.isArray(this.neighbors) || this.neighbors.length === 0) {
+            return b;
         }
-        for (let i = 0; i < this.borders.length; i++) {
-            for (let j = 0; j < this.all_countries.length; j++) {
-                if (this.borders[i] === this.all_countries[j].alpha3Code) {
-                    b.push(this.all_countries[j]);
+        for (let i = 0; i < this.neighbors.length; i++) {
+            for (let j = 0; j < Country.all_countries.length; j++) {
+                if (this.neighbors[i] === Country.all_countries[j].alpha3Code) {
+                    b.push(Country.all_countries[j]);
                 }
             }
         }
         return b;
     }
-
+    // test getBorders
+    
     /* 
     Méthode getCurrencies()
     Permet de retourner un tableau des monnaies (objet Currencies)
@@ -185,11 +186,28 @@ class Country {
     Méthode getNbLanguages()
     Permet de retourner le nombre de langues parlées dans le pays
     */
-   getNbLanguages() {
+    getNbLanguages() {
         return this.languages.length;
     }
 
+    /*
+    Méthode hasCommonLanguage(country)
+    Permet de vérifier si le pays a au moins une langue en commun avec un autre pays
+    */
+    hasCommonLanguage(country) {
+        if (!country || !country.languages) return false;
+        return this.languages.some(lang => 
+            country.languages.includes(lang)
+        );
+    }
 
 }
 
 Country.fill_countries()
+// test getborders with china
+for (let i = 0; i < Country.all_countries.length; i++) {
+    if (Country.all_countries[i].name === "Chine") {
+        console.table(Country.all_countries[i].getBorders());
+        break;
+    }
+}

@@ -36,8 +36,6 @@ function moreNeighbors() {
         const borders = country.neighbors;
         if (country.getNbNeighbors() >= maxNeighbors) {
             maxNeighbors = borders.length;
-            console.log("Pays = ", country.name," NB = ", country.getNbNeighbors());    
-            console.log("Voisins = ", country.getNeighbors(country.neighbors));
         }
         
     }
@@ -66,15 +64,12 @@ Fonction moreLanguages()
 Tableau des pays parlant le plus de langues. Affichez aussi les langues (objets Language). 
 */
 function moreLanguages() {
-    console.log("Comming soon !");
     const allCountries = Country.all_countries;
     let maxLanguage = 0;
     for (const country of allCountries) {
         const languages = country.languages;
         if (country.languages.length >= maxLanguage) {
             maxLanguage = languages.length;
-            console.log("Pays = ", country.name," NB = ", country.languages.length);    
-            console.log("Languages = ", country.languages);
         }
         
     }
@@ -82,7 +77,6 @@ function moreLanguages() {
     console.table(countriesWithMaxLanguage);
 }
 // Appel de la fonction
-moreLanguages();    
 
 
 
@@ -92,27 +86,46 @@ Fonction withCommonLanguage()
 Tableau des pays ayant au moins un voisin parlant l’une de  ses  langues.  Affichez  aussi  les  pays  voisins  (objets  Country)  et  les  langues  en question (objets Language). 
 */
 function withCommonLanguage() {
-    const allCountries = Country.all_countries;
-    const result = [];
-    for (const country of allCountries) {
-        let hasCommonLanguage = false;
-        for (const neighbor of country.neighbors) {
-            if (neighbor != null) {
-                for (const language of country.languages) {
-                    if (neighbor.languages.includes(language)) {
-                        hasCommonLanguage = true;
-                        break;
-                    }
-                }
-            }
-            if (!hasCommonLanguage) break;
+    const results = [];
+    // Parcours tous les pays
+    for (const country of Country.all_countries) {
+        // Récupérer les voisins comme objets Country
+        const neighborCountries = country.neighbors
+        .map(code => Country.all_countries.find(c => c.alpha3 === code))
+        .filter(n => n); // filtre les undefined si code invalide
+        // Pour stocker voisins partageant au moins une langue
+        const commonLanguageNeighbors = [];
+        for (const neighbor of neighborCountries) {
+        // Trouver les langues communes entre country et neighbor
+        const commonLangs = country.languages.filter(clang =>
+            neighbor.languages.some(nlang => nlang.name === clang.name)
+        );
+        if (commonLangs.length > 0) {
+            commonLanguageNeighbors.push({
+            neighbor: neighbor,
+            commonLanguages: commonLangs
+            });
         }
-        if (hasCommonLanguage) {
-            result.push(country);
+        }
+        // Si au moins un voisin partage une langue
+        if (commonLanguageNeighbors.length > 0) {
+            results.push({
+                country: country,
+                neighbors: commonLanguageNeighbors
+            });
         }
     }
-    console.table(result);
+    // Affichage du résultat
+    for (const result of results) {
+        console.log(`Pays: ${result.country.name}`);
+        for (const neighbor of result.neighbors) {
+            console.log(`  Voisin: ${neighbor.neighbor.name}`);
+            console.log(`  Langues communes: ${neighbor.commonLanguages.map(lang => lang.name).join(', ')}`);
+        }
+    }
+    console.table(results);
 }
+
 
 /* 
 Test Q6
@@ -120,28 +133,57 @@ Fonction withoutCommonCurrency()
 Tableau  des  pays  sans  aucun  voisin ayant au moins une de ses monnaies. 
 */
 function withoutCommonCurrency() {
+    const results = [];
+    
+    // Parcours tous les pays
+    for (const country of Country.all_countries) {
+        // Récupérer les voisins comme objets Country
+        const neighborCountries = country.neighbors
+            .map(code => Country.all_countries.find(c => c.alpha3 === code))
+            .filter(n => n); // filtre les undefined si code invalide
 
-    const allCountries = Country.all_countries;
-    const result = [];
-    for (const country of allCountries) {
-        let hasCommonCurrency = false;
-        for (const neighbor of country.neighbors) {
-            if (neighbor != null) {
-                for (const currency of country.currencies) {
-                    if (neighbor.currencies.includes(currency)) {
-                        hasCommonCurrency = true;
-                        break;
-                    }
-                }
+        // Pour stocker les voisins partageant au moins une monnaie
+        const commonCurrencyNeighbors = [];
+        
+        for (const neighbor of neighborCountries) {
+            // Trouver les monnaies communes entre country et neighbor
+            const commonCur = country.currencies.filter(ccu =>
+                neighbor.currencies.some(ncu => ncu.code === ccu.code) // Comparer par code
+            );
+            if (commonCur.length > 0) {
+                commonCurrencyNeighbors.push({
+                    neighbor: neighbor,
+                    commonCurrencies: commonCur
+                });
             }
-            if (hasCommonCurrency) break;
         }
-        if (!hasCommonCurrency) {
-            result.push(country);
+
+        // Si aucun voisin ne partage de monnaie
+        if (commonCurrencyNeighbors.length === 0 && neighborCountries.length > 0) {
+            results.push({
+                country: country,
+                neighbors: neighborCountries // Ajouter les voisins
+            });
         }
     }
-    console.table(result);
+
+    // Affichage du résultat
+    console.log("Pays sans voisin ayant une monnaie commune :");
+    for (const result of results) {
+        console.log(`Pays: ${result.country.name}`);
+        for (const neighbor of result.neighbors) {
+            console.log(`  Voisin: ${neighbor.name}`);
+            // Afficher les monnaies non communes
+            const nonCommonCurrencies = neighbor.currencies.map(c => c.name).join(', ');
+            console.log(`  Monnaies non communes: ${nonCommonCurrencies}`);
+        }
+    }
+    
+    console.table(results);
 }
+
+// --- Exemple d’utilisation ---
+
 
 /* 
 Test Q7
@@ -167,10 +209,9 @@ function sortingDecreasingDensity() {
         return b.getPopDensity() - a.getPopDensity();
     });
 
-    console.table(sortedCountries);
+    console.table(result);
 }
 // Appel de la fonction
-sortingDecreasingDensity();
 
 /* 
 Test Q8
