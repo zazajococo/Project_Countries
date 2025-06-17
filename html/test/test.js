@@ -210,6 +210,7 @@ function sortingDecreasingDensity() {
     });
 
     console.table(result);
+    console.table(result);
 }
 // Appel de la fonction
 
@@ -221,10 +222,8 @@ Tableau des pays ayant le plusieurs Top Level Domains Internet.
 function moreTopLevelDomains() {
     const MultipleTopLevelDomains = [];
     for (const country of Country.all_countries) {
-        console.log("Pays= ", country.name, " TLD = ", country.topLevelDomain);
         if (country.topLevelDomain.length > 1) {
             MultipleTopLevelDomains.push(country);
-            console.log("Pays= ", country.name, " TLD = ", country.topLevelDomain);
         }
     }
     console.table(MultipleTopLevelDomains);

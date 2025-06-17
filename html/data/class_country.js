@@ -133,9 +133,10 @@ class Country {
     */
     getBorders() {
         const b = [];
-        if (!Array.isArray(this.borders)) {
+        if (!Array.isArray(this.borders) || this.borders === null) {
             this.b = [];
         }
+        console.log("borders",this.borders)
         for (let i = 0; i < this.borders.length; i++) {
             for (let j = 0; j < this.all_countries.length; j++) {
                 if (this.borders[i] === this.all_countries[j].alpha3Code) {
@@ -171,7 +172,7 @@ class Country {
     getLanguages() {
         const languages = Language.all_languages;
         const lang = [];
-        for (l of this.languages) {
+        for (let l of this.languages) {
             for (let j = 0; j < languages.length; j++) {
                 if (l.name === languages[j].name) {
                     lang.push(l);
