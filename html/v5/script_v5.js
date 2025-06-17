@@ -251,7 +251,7 @@ function sortName() {
     dataCountry.sort((a, b) => {
         const nomA = a.name.toLowerCase(); // minuscule pour que se soit égale
         const nomB = b.name.toLowerCase(); // minuscule pour que se soit égale
-        if (orderAscendant) {
+        if (ascendingOrder) {
             return nomA.localeCompare(nomB, 'fr', { sensitivity: 'base' })
         } else {
             return nomB.localeCompare(nomA, 'fr', { sensitivity: 'base' })
@@ -259,7 +259,7 @@ function sortName() {
         
     });
 
-    orderAscendant = !orderAscendant;
+    ascendingOrder = !ascendingOrder;
     displayCountries(currentPage, dataCountry);
 }
 
@@ -275,13 +275,13 @@ function sortCapital() {
         const nomA = a.name.toLowerCase(); // minuscule pour que se soit égale
         const nomB = b.name.toLowerCase(); // minuscule pour que se soit égale
         if (capitalA === capitalB) {
-            if (orderAscendant) {
+            if (ascendingOrder) {
                 return nomA.localeCompare(nomB, 'fr', { sensitivity: 'base' })
             } else {
                 return nomB.localeCompare(nomA, 'fr', { sensitivity: 'base' })
             }
         } else {
-            if (orderAscendant) {
+            if (ascendingOrder) {
                 return capitalA.localeCompare(capitalB, 'fr', { sensitivity: 'base' })
             } else {
                 return capitalB.localeCompare(capitalA, 'fr', { sensitivity: 'base' })
@@ -290,7 +290,7 @@ function sortCapital() {
         
     });
 
-    orderAscendant = !orderAscendant;
+    ascendingOrder = !ascendingOrder;
     displayCountries(currentPage, dataCountry);
 }
 
@@ -307,13 +307,13 @@ function sortContinent() {
         const nomB = b.name.toLowerCase(); // minuscule pour que se soit égale
 
         if (continentA === continentB) {
-            if (orderAscendant) {
+            if (ascendingOrder) {
                 return nomA.localeCompare(nomB, 'fr', { sensitivity: 'base' })
             } else {
                 return nomB.localeCompare(nomA, 'fr', { sensitivity: 'base' })
             }
         } else {
-            if (orderAscendant) {
+            if (ascendingOrder) {
                 return continentA.localeCompare(continentB, 'fr', { sensitivity: 'base' })
             } else {
                 return continentB.localeCompare(continentA, 'fr', { sensitivity: 'base' })
@@ -321,7 +321,7 @@ function sortContinent() {
         }
     });
 
-    orderAscendant = !orderAscendant;
+    ascendingOrder = !ascendingOrder;
     displayCountries(currentPage, dataCountry);
 }
 
@@ -337,13 +337,13 @@ function sortPopulation() {
         const nomA = a.name.toLowerCase(); // minuscule pour que se soit égale
         const nomB = b.name.toLowerCase(); // minuscule pour que se soit égale
         if (populationA === populationB) {
-            if (orderAscendant) {
+            if (ascendingOrder) {
                 return nomA.localeCompare(nomB, 'fr', { sensitivity: 'base' })
             } else {
                 return nomB.localeCompare(nomA, 'fr', { sensitivity: 'base' })
             }
         } else {
-            if(orderAscendant){
+            if(ascendingOrder){
                 return populationA - populationB;
             }else{
                 return populationB - populationA;
@@ -354,7 +354,7 @@ function sortPopulation() {
       });
 
 
-    orderAscendant = !orderAscendant;
+    ascendingOrder = !ascendingOrder;
     displayCountries(currentPage, dataCountry);
 }
 
@@ -370,13 +370,13 @@ function sortArea() {
         const nomA = a.name.toLowerCase(); // minuscule pour que se soit égale
         const nomB = b.name.toLowerCase(); // minuscule pour que se soit égale
         if (surfaceA === surfaceB) {
-            if (orderAscendant) {
+            if (ascendingOrder) {
                 return nomA.localeCompare(nomB, 'fr', { sensitivity: 'base' })
             } else {
                 return nomB.localeCompare(nomA, 'fr', { sensitivity: 'base' })
             }
         } else {
-            if(orderAscendant){
+            if(ascendingOrder){
                 return surfaceA - surfaceB;
             }else{
                 return surfaceB - surfaceA;
@@ -387,7 +387,7 @@ function sortArea() {
       });
 
 
-    orderAscendant = !orderAscendant;
+    ascendingOrder = !ascendingOrder;
     displayCountries(currentPage, dataCountry);
 }
 
@@ -403,13 +403,13 @@ function sortDensity() {
         const nomA = a.name.toLowerCase(); // minuscule pour que se soit égale
         const nomB = b.name.toLowerCase(); // minuscule pour que se soit égale
         if (densiteA === densiteB) {
-            if (orderAscendant) {
+            if (ascendingOrder) {
                 return nomA.localeCompare(nomB, 'fr', { sensitivity: 'base' })
             } else {
                 return nomB.localeCompare(nomA, 'fr', { sensitivity: 'base' })
             }
         } else {
-            if(orderAscendant){
+            if(ascendingOrder){
                 return densiteA - densiteB;
             }else{
                 return densiteB - densiteA;
@@ -420,7 +420,7 @@ function sortDensity() {
       });
 
 
-    orderAscendant = !orderAscendant;
+    ascendingOrder = !ascendingOrder;
     displayCountries(currentPage, dataCountry);
 }
 

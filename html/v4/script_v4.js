@@ -218,7 +218,7 @@ function applyFilters() {
     tabCountryFilters = countries.filter(pays => {
         const matchContinent = !selectedContinent || pays.region === selectedContinent;
         const matchLanguage = !selectedLanguage || pays.languages.some(lang => lang.name === selectedLanguage);
-        const matchPays = !selectedPays || pays.translations.fr.toLowerCase().includes(selectedPays) || pays.name.toLowerCase().includes(selectedPays) ;
+        const matchPays = !selectedCountries || pays.translations.fr.toLowerCase().includes(selectedCountries) || pays.name.toLowerCase().includes(selectedCountries) ;
         return matchContinent && matchLanguage && matchPays;
     });
 
