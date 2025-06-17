@@ -39,10 +39,36 @@
         img {
             height: 30px; /* Ajustez la taille de l'image du drapeau */
         }
+
+            button {
+        background-color: #ff6f61; 
+        color: white;
+        border: none;
+        border-radius: 25px; 
+        padding: 10px 20px; 
+        cursor: pointer; 
+        margin: 5px; 
+    }
+#btn-retour {
+                position: fixed;
+                top: 10px;
+                left: 10px;
+                z-index: 1000;
+            }
+  #btn-retour button {
+                background-color: #4a2c6d; 
+                color: white;
+                padding: 10px 20px; 
+                border-radius: 5px; 
+            }
+            #btn-retour button:hover {
+                background-color: #ff6f61; 
+            }
     </style>
 </head>
 <body>
-    <table>
+    <a id="btn-retour" href="../../index.html"><button>Retour</button></a>
+     <table>
         <thead>
             <tr>
                 <th>Nom en français</th>
@@ -63,6 +89,7 @@
                 <td><img src="https://upload.wikimedia.org/wikipedia/en/c/c3/Flag_of_France.svg" alt="Drapeau de la France"></td>
             </tr>
         </tbody>
-    </table>
+     </table>
+    
 </body>
 </html>

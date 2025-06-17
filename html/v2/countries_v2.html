@@ -12,83 +12,99 @@ JSON et en manipulant le DOM pour ajouter vos <tr>. -->
         <title>Template - Informations sur un Pays</title>
         <style>
             html {
-            height: 100%; 
-            margin: 0; 
-        }
-    h1, h2, h3 {
-        color: #ff6f61; 
-        text-align: center; 
-    }
-    body {
-                height: auto; 
-                width: 100%;
-                overflow-y: auto; 
-                flex-direction: column;
-                justify-content: flex-start;
-                align-items: center;
-                background-color: #f8e1f4;
-                font-family: 'Comic Sans MS', cursive, sans-serif;
-                color: #4a2c6d;
+                height: 100%; 
+                margin: 0; 
             }
-    button:hover {
-        background-color: #ff4081; 
-    }
-    .table-container {
-        margin: 0 auto;
-        width: 80%;
-        padding: 20px; 
-        max-height: max-content;
-        border: 2px solid #ff6f61;
-        border-radius: 10px;
-        background-color: #fff;
-        display: flex;
-        justify-content: center;
-    }
-    
-    table {
-        border-collapse: collapse;
-        width: 100%; 
-        margin: 0;
-        border: 2px solid #ff6f61;
-        border-radius: 10px;
-        overflow: hidden;
-        background-color: #fff;
-    }
-    
-    th, td {
-        border: 1px solid #ff6f61;
-        padding: 10px;
-        text-align: left;
-    }
-    
-    th {
-        background-color: #ff6f61;
-        color: white;
-    }
-    
-    img {
-        height: 30px;
-    }
-    
-    #pagination {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        margin: 20px;
-    }
-    
-    button {
-        background-color: #ff6f61; 
-        color: white;
-        border: none;
-        border-radius: 25px; 
-        padding: 10px 20px; 
-        cursor: pointer; 
-        margin: 5px; 
-    }
+            h1, h2, h3 {
+                color: #ff6f61; 
+                text-align: center; 
+            }
+            body {
+                    height: auto; 
+                    width: 100%;
+                    overflow-y: auto; 
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    align-items: center;
+                    background-color: #f8e1f4;
+                    font-family: 'Comic Sans MS', cursive, sans-serif;
+                    color: #4a2c6d;
+            }
+            button:hover {
+                background-color: #ff4081; 
+            }
+            .table-container {
+                margin: 0 auto;
+                width: 80%;
+                padding: 20px; 
+                max-height: max-content;
+                border: 2px solid #ff6f61;
+                border-radius: 10px;
+                background-color: #fff;
+                display: flex;
+                justify-content: center;
+            }
+        
+            table {
+                border-collapse: collapse;
+                width: 100%; 
+                margin: 0;
+                border: 2px solid #ff6f61;
+                border-radius: 10px;
+                overflow: hidden;
+                background-color: #fff;
+            }
+            
+            th, td {
+                border: 1px solid #ff6f61;
+                padding: 10px;
+                text-align: left;
+            }
+            
+            th {
+                background-color: #ff6f61;
+                color: white;
+            }
+        
+            img {
+                height: 30px;
+            }
+            
+            #pagination {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                margin: 20px;
+            }
+            
+            button {
+                background-color: #ff6f61; 
+                color: white;
+                border: none;
+                border-radius: 25px; 
+                padding: 10px 20px; 
+                cursor: pointer; 
+                margin: 5px; 
+            }
+            #btn-retour {
+                position: fixed;
+                top: 10px;
+                left: 10px;
+                z-index: 1000;
+            }
+            #btn-retour button {
+                background-color: #4a2c6d; 
+                color: white;
+                padding: 10px 20px; 
+                border-radius: 5px; 
+            }
+            #btn-retour button:hover {
+                background-color: #ff6f61; 
+            }
         </style>
     </head>
     <body>
+        <a  id="btn-retour" href="../../index.html"><button>Retour</button></a>
         <h1>Tous les pays</h1>
         <div class="table-container">
             <table>
@@ -108,8 +124,7 @@ JSON et en manipulant le DOM pour ajouter vos <tr>. -->
         </div>
         <div id="pagination">
             <p>pagination</p>
-        </div>
-        
+        </div>  
     </body>
     <script src="../data/countries.js"></script>
     <script src="../data/class_country.js"></script>

@@ -105,7 +105,8 @@ function withCommonLanguage() {
             neighbor: neighbor,
             commonLanguages: commonLangs
             });
-        }
+
+
         }
         // Si au moins un voisin partage une langue
         if (commonLanguageNeighbors.length > 0) {
@@ -123,6 +124,7 @@ function withCommonLanguage() {
             console.log(`  Langues communes: ${neighbor.commonLanguages.map(lang => lang.name).join(', ')}`);
         }
     }
+
     console.table(results);
 }
 

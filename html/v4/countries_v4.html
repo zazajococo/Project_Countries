@@ -164,76 +164,102 @@ JSON et en manipulant le DOM pour ajouter vos <tr>. -->
             border: 1px solid #ff6f61;
             border-radius: 5px;
         }
+            button {
+                background-color: #ff6f61; 
+                color: white;
+                border: none;
+                border-radius: 25px; 
+                padding: 10px 20px; 
+                cursor: pointer; 
+                margin: 5px; 
+            }
+        
+            #btn-retour {
+                position: fixed;
+                top: 10px;
+                left: 10px;
+                z-index: 1000;
+            }
+            #btn-retour button {
+                background-color: #4a2c6d; 
+                color: white;
+                padding: 10px 20px; 
+                border-radius: 5px; 
+            }
+            #btn-retour button:hover {
+                background-color: #ff6f61; 
+            }
         </style>
     </head>
     <body>
-        <h1>Tous les pays</h1>
-        <div id="detailsContainer" class="details-container">
-            <div class="details-content">
-                <button id="closeDetails">&times;</button>
-                <h2 id="countryName"></h2>
+        <a id="btn-retour" href="../../index.html"><button>Retour</button></a>
+            <h1>Tous les pays</h1>
+            <div id="detailsContainer" class="details-container">
+                <div class="details-content">
+                    <button id="closeDetails">&times;</button>
+                    <h2 id="countryName"></h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Nom natif</th>
+                                <th>Région</th>
+                                <th>Frontière(s)</th>
+                                <th>Fuseau(x) horaire(s)</th>
+                                <th>Monnaie(s)</th>
+                                <th>Langue(s)</th>
+                                <th>Indépendance</th>
+                            </tr>
+                        </thead>
+                        <tbody id="detailsTableBody">
+                        </tbody>
+                    </table>
+                </div>     
+            </div>
+            <div id="flagContainer" class="flag-container">
+                <div class="flag-content">
+                    <button id="closeFlag">&times;</button>
+                    <img id="largeFlag" class="flag-large" src="" alt="Drapeau en grand" />
+                </div>
+            </div>
+            <div class="filter-container">
+                <h4> Filtrage</h4>
+                <label for="continentFilter">Continent :</label>
+                <select id="continentFilter">
+                    <option value="">Sélectionner un continent</option>
+                </select>
+
+                <label for="languageFilter">Langue :</label>
+                <select id="languageFilter">
+                    <option value="">Sélectionner une langue</option>
+                </select>
+
+                <label for="countriesFilter">Pays :</label>
+                <input type="text" id="countriesFilter" placeholder="Rechercher un pays...">
+
+            </div>
+            <br>
+            <div class="table-container">
                 <table>
                     <thead>
                         <tr>
-                            <th>Code</th>
-                            <th>Nom natif</th>
-                            <th>Région</th>
-                            <th>Frontière(s)</th>
-                            <th>Fuseau(x) horaire(s)</th>
-                            <th>Monnaie(s)</th>
-                            <th>Langue(s)</th>
-                            <th>Indépendance</th>
+                            <th>Nom en français</th>
+                            <th>Capital</th>
+                            <th>Population</th>
+                            <th>Surface (km²)</th>
+                            <th>Densité de population (hab/km²)</th>
+                            <th>Continent d’appartenance</th>
+                            <th>Drapeau</th>
                         </tr>
                     </thead>
-                    <tbody id="detailsTableBody">
+                    <tbody id="countriesTableBody">
                     </tbody>
                 </table>
-            </div>     
-        </div>
-        <div id="flagContainer" class="flag-container">
-            <div class="flag-content">
-                <button id="closeFlag">&times;</button>
-                <img id="largeFlag" class="flag-large" src="" alt="Drapeau en grand" />
+            </div>
+            <div id="pagination">
+                <p>pagination</p>
             </div>
         </div>
-        <div class="filter-container">
-            <h4> Filtrage</h4>
-            <label for="continentFilter">Continent :</label>
-            <select id="continentFilter">
-                <option value="">Sélectionner un continent</option>
-            </select>
-
-            <label for="languageFilter">Langue :</label>
-            <select id="languageFilter">
-                <option value="">Sélectionner une langue</option>
-            </select>
-
-            <label for="countriesFilter">Pays :</label>
-            <input type="text" id="countriesFilter" placeholder="Rechercher un pays...">
-
-        </div>
-        <br>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nom en français</th>
-                        <th>Capital</th>
-                        <th>Population</th>
-                        <th>Surface (km²)</th>
-                        <th>Densité de population (hab/km²)</th>
-                        <th>Continent d’appartenance</th>
-                        <th>Drapeau</th>
-                    </tr>
-                </thead>
-                <tbody id="countriesTableBody">
-                </tbody>
-            </table>
-        </div>
-        <div id="pagination">
-            <p>pagination</p>
-        </div>
-        
     </body>
     <script src="../data/countries.js"></script>
     <script src="../data/class_country.js"></script>

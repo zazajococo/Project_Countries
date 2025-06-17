@@ -68,10 +68,35 @@ th {
 img {
     height: 30px;
 }
+    button {
+        background-color: #ff6f61; 
+        color: white;
+        border: none;
+        border-radius: 25px; 
+        padding: 10px 20px; 
+        cursor: pointer; 
+        margin: 5px; 
+    }
+    #btn-retour {
+                position: fixed;
+                top: 10px;
+                left: 10px;
+                z-index: 1000;
+            }
 
+    #btn-retour button {
+                background-color: #4a2c6d; 
+                color: white;
+                padding: 10px 20px; 
+                border-radius: 5px; 
+            }
+            #btn-retour button:hover {
+                background-color: #ff6f61; 
+            }
     </style>
 </head>
 <body>
+    <a  id="btn-retour"  href="../../index.html"><button>Retour</button></a>
     <h1>Tous les pays</h1>
     <div class="table-container">
         <table>
@@ -89,6 +114,7 @@ img {
             </tbody>
         </table>
     </div>
+    
     
 </body>
 <script src="../data/countries.js"></script>
